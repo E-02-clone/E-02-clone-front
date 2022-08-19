@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Detail = () => {
+function Detail() {
   return (
     <>
       <Head>대충 헤드</Head>
@@ -25,7 +25,7 @@ const Detail = () => {
       </MiddleMainBox>
     </>
   );
-};
+}
 
 const Head = styled.div`
   background-color: blue;
