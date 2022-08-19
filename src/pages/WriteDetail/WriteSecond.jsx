@@ -53,7 +53,9 @@ function WriteSecond({
   return (
     <Background>
       <LeftBicBox>
-        <div>두번째 화면, 이미지는 s3, 위치는 선택으로, 가격은 작성으로</div>
+        <LeftText>이제 숙소 사진을 올릴 차례입니다.</LeftText>
+        <LeftText>숙소 이름을 만들어 주세요.</LeftText>
+        <LeftText>숙소에 대해서 설명해주세요.</LeftText>
       </LeftBicBox>
       <RightBicBox>
         <div>title</div>
@@ -112,6 +114,14 @@ const Background = styled.div`
 const LeftBicBox = styled.div`
   width: 50%;
   background: linear-gradient(#de17a2, #2323c0);
+`;
+
+const LeftText = styled.div`
+  width: 70%;
+  color: white;
+  font-size: 48px !important;
+  line-height: 56px !important;
+  margin: 180px auto;
 `;
 
 const RightBicBox = styled.div`
