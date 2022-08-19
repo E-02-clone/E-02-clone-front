@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const Detail = () => {
-    return (
-        <div>
-
-        </div>
-    );
+  return (
+    <div>
+      <div>아무말</div>
+    </div>
+  );
 };
 
 export default Detail;
