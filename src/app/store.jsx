@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import ItemPostSlice from "./slice/ItemPostSlice";
+import ItemSlice from "./slice/ItemPostSlice";
 
 export const store = configureStore({
-  reducer: { ItemPostSlice },
+  reducer: { ItemSlice },
 });

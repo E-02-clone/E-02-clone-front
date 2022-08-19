@@ -1,14 +1,17 @@
 import React, { useRef, useState } from "react";
+// import { useDispatch } from "react-redux";
 import WriteFirst from "./WriteDetail/WriteFirst";
 import WriteSecond from "./WriteDetail/WriteSecond";
+import { _PostItem } from "../app/slice/ItemSlice";
 
 const Write = () => {
+  // const dispatch = useDispatch();
   const [showPage, setShowpage] = useState(true);
 
   const location_ref = useRef(null);
   const [location, setLocation] = useState("");
   const price_ref = useRef(null);
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(0);
   const category_ref = useRef(null);
   const [category, setCategory] = useState("");
   const title_ref = useRef(null);
@@ -30,9 +33,15 @@ const Write = () => {
     setContent(j);
   };
 
-  const check = () => {
+  const PostItem = () => {
     console.log(location, price, category, title, content);
     console.log(array);
+    // dispatch(
+    //   _PostItem([
+    //     { token: "token123" },
+    //     { title, content, content, category, price, location, img: array },
+    //   ])
+    // );
   };
 
   return (
@@ -51,7 +60,7 @@ const Write = () => {
           setArray={setArray}
           title_ref={title_ref}
           content_ref={content_ref}
-          check={check}
+          PostItem={PostItem}
           RememberSFage={RememberSFage}
         />
       )}

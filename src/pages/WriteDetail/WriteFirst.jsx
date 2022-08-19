@@ -10,7 +10,7 @@ function WriteFirst({
 }) {
   // 인풋값 기억, 가격 유효성 검사.
   const Remember = () => {
-    if (!isNaN(price_ref.current.value) || price_ref.current.value < 0) {
+    if (false) {
       alert("숫자만 입력해주세요");
     } else {
       RememberFFage(
@@ -53,7 +53,7 @@ function WriteFirst({
               setShowpage(false);
             }}
           >
-            다음페이지
+            다음
           </button>
         </div>
       </RightBicBox>

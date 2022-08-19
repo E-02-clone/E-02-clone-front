@@ -9,7 +9,7 @@ function WriteSecond({
   title_ref,
   content_ref,
   RememberSFage,
-  check,
+  PostItem,
 }) {
   window.Buffer = window.Buffer || require("buffer").Buffer;
   // 사진이 담기는 임시 공간 다시 부모 컴퍼넌트의 array에 담아준다.
@@ -46,8 +46,8 @@ function WriteSecond({
     // 제출하기 넣을 공간
   };
 
-  const console = () => {
-    check();
+  const showconsole = () => {
+    PostItem();
   };
 
   return (
@@ -85,11 +85,11 @@ function WriteSecond({
               ToNextPage();
             }}
           >
-            첫번쨰 페이지로
+            이전
           </DoneBtn>
           <button
             onClick={() => {
-              console();
+              showconsole();
             }}
           >
             콘솔찍히나

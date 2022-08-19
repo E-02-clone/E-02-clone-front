@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+// import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 function Detail() {
+  // const dispatch = useDispatch()
+  // const state = useSelector((state) => state);
+
+  // useEffect(() => {
+  //   dispatch(_GetItems())
+  // }, [])
+
   return (
     <>
       <Head>대충 헤드</Head>
