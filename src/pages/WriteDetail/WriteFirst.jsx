@@ -8,14 +8,17 @@ function WriteFirst({
   category_ref,
   RememberFFage,
 }) {
-  // 다른 컴퍼넌트로 넘어가게 되면 기억을 잃어서
-  // Write페이지에 따로 저장하고 다른 페이지로 넘어가게 처리
+  // 인풋값 기억, 가격 유효성 검사.
   const Remember = () => {
-    RememberFFage(
-      category_ref.current.value,
-      location_ref.current.value,
-      price_ref.current.value
-    );
+    if (!isNaN(price_ref.current.value) || price_ref.current.value < 0) {
+      alert("숫자만 입력해주세요");
+    } else {
+      RememberFFage(
+        category_ref.current.value,
+        location_ref.current.value,
+        price_ref.current.value
+      );
+    }
   };
   return (
     <Background>

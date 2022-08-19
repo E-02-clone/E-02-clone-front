@@ -7,7 +7,7 @@ export const _PostComment = createAsyncThunk(
   "comment/post",
   async (comment) => {
     const result = await axios.post(
-      server_url + `/api/comments/${comment.Id}`,
+      server_url + `/api/item`,
       { comment: comment.postCmt },
       {
         headers: {
