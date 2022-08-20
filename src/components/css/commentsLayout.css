@@ -1,0 +1,44 @@
+.commentsLayout{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.commentsSubject{
+    width: 100%;
+}
+
+.modalOpen{
+  visibility: visible;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 5% 25%;
+transition: all 300ms ease-in;
+animation: modal-bg-show 0.3s;
+}
+
+.modalClose {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10% 25%;
+  left: 0;
+  z-index: 99;
+transition: all 100ms ease-in;
+}
+
+@keyframes modal-bg-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
