@@ -1,5 +1,53 @@
 {
   "login": {
     "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c" 
-  }
+  },
+  
+    "data":
+        [
+            {
+                "title": "Abiansemal",
+                "itemkey": 1,
+                "img": ["https://a0.muscache.com/im/pictures/11bd9fc9-4ca9-4208-b449-bdc63a1969b9.jpg?im_w=720", "https://a0.muscache.com/im/pictures/d0e3bb05-a96a-45cf-af92-980269168096.jpg?im_w=720"],
+                "price": 50000,
+                "category": "기상천외한 숙소",
+                "location": "수원"
+            },
+            {
+              "title": "Abiansemal",
+              "itemkey": 2,
+              "img": ["https://a0.muscache.com/im/pictures/11bd9fc9-4ca9-4208-b449-bdc63a1969b9.jpg?im_w=720", "https://a0.muscache.com/im/pictures/d0e3bb05-a96a-45cf-af92-980269168096.jpg?im_w=720"],
+              "price": 50000,
+              "category": "기상천외한 숙소",
+              "location": "수원"
+          },
+          {
+            "title": "Abiansemal",
+            "itemkey": 3,
+            "img": ["https://a0.muscache.com/im/pictures/11bd9fc9-4ca9-4208-b449-bdc63a1969b9.jpg?im_w=720", "https://a0.muscache.com/im/pictures/d0e3bb05-a96a-45cf-af92-980269168096.jpg?im_w=720"],
+            "price": 50000,
+            "category": "기상천외한 숙소",
+            "location": "수원"
+        },
+        {
+          "title": "Abiansemal",
+          "itemkey": 4,
+          "img": ["https://a0.muscache.com/im/pictures/11bd9fc9-4ca9-4208-b449-bdc63a1969b9.jpg?im_w=720", "https://a0.muscache.com/im/pictures/d0e3bb05-a96a-45cf-af92-980269168096.jpg?im_w=720"],
+          "price": 50000,
+          "category": "기상천외한 숙소",
+          "location": "수원"
+      },
+      {
+        "title": "Abiansemal",
+        "itemkey": 5,
+        "img": ["https://a0.muscache.com/im/pictures/11bd9fc9-4ca9-4208-b449-bdc63a1969b9.jpg?im_w=720", "https://a0.muscache.com/im/pictures/d0e3bb05-a96a-45cf-af92-980269168096.jpg?im_w=720"],
+        "price": 50000,
+        "category": "기상천외한 숙소",
+        "location": "수원"
+    }
+        ],
+    "likes": [
+        { "itemkey": 7 },
+        { "itemkey": 9 }
+    ]
 }
