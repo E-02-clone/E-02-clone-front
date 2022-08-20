@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import $ from "jquery";
 
 function WriteFirst({
   setShowpage,
@@ -10,16 +11,13 @@ function WriteFirst({
 }) {
   // 인풋값 기억, 가격 유효성 검사.
   const Remember = () => {
-    if (false) {
-      alert("숫자만 입력해주세요");
-    } else {
-      RememberFFage(
-        category_ref.current.value,
-        location_ref.current.value,
-        price_ref.current.value
-      );
-    }
+    RememberFFage(
+      category_ref.current.value,
+      location_ref.current.value,
+      price_ref.current.value
+    );
   };
+
   return (
     <Background>
       <LeftBicBox>
@@ -38,15 +36,73 @@ function WriteFirst({
                 Remember();
               }}
             >
-              <option value="아파트" selected="selected">
-                아파트
-              </option>
-              <option value="주택">주택</option>
-              <option value="별채">별채</option>
-              <option value="독특한 숙소">독특한 숙소</option>
-              <option value="부티크호텔">부티크호텔</option>
-              <option value="B&amp;B">B&amp;B</option>
+              <option value="기상천외한 숙소">기상천외한 숙소</option>
+              <option value="국립공원">국립공원</option>
+              <option value="통나무집">통나무집</option>
+              <option value="섬">섬</option>
+              <option value="해변 근처">해변 근처</option>
             </select>
+            {/* <CategoryBox>
+              <div>
+                <div>
+                  <CategoryBtn
+                    id="ct1"
+                    ref={category_ref}
+                    onChange={() => {
+                      Remember();
+                    }}
+                  >
+                    기상천외한 숙소
+                  </CategoryBtn>
+                </div>
+                <div>
+                  <CategoryBtn
+                    id="ct2"
+                    ref={category_ref}
+                    onChange={() => {
+                      Remember();
+                    }}
+                  >
+                    국립공원
+                  </CategoryBtn>
+                </div>
+                <div>
+                  <CategoryBtn
+                    id="ct3"
+                    ref={category_ref}
+                    onChange={() => {
+                      Remember();
+                    }}
+                  >
+                    통나무집
+                  </CategoryBtn>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <CategoryBtn
+                    d="ct4"
+                    ref={category_ref}
+                    onChange={() => {
+                      Remember();
+                    }}
+                  >
+                    섬
+                  </CategoryBtn>
+                </div>
+                <div>
+                  <CategoryBtn
+                    d="ct5"
+                    ref={category_ref}
+                    onChange={() => {
+                      Remember();
+                    }}
+                  >
+                    해변 근처
+                  </CategoryBtn>
+                </div>
+              </div>
+            </CategoryBox> */}
           </Category>
         </RightTextBox>
         <RightTextBox name="location">
@@ -73,6 +129,7 @@ function WriteFirst({
             />
           </Price>
         </RightTextBox>
+        <ToHomeBtn>홈으로</ToHomeBtn>
         <ToNextPage
           onClick={() => {
             setShowpage(false);
@@ -117,24 +174,80 @@ const RightTextBox = styled.div`
 `;
 
 const Category = styled.div`
-  float: left;
-  padding: 55px 100px;
+  width: 80%;
+  padding: 55px 70px;
+  font-weight: bold;
+  font-size: 23px;
+  select {
+    width: 40%;
+    height: 30px;
+    border-radius: 5px;
+  }
 `;
 
+// const CategoryBox = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+// `;
+
+// const CategoryBtn = styled.button`
+//   padding: 15px 25px;
+//   margin: 10px;
+//   border-radius: 10px;
+//   background-color: white;
+//   border: 2px solid lightgray;
+//   /* :focus-within {
+//     border: 2px solid black;
+//   } */
+//   :focus {
+//     border: 2px solid black;
+//   }
+// `;
+
 const Location = styled.div`
-  float: right;
-  padding: 80px 100px;
+  padding: 80px 70px;
+  font-weight: bold;
+  font-size: 23px;
+  input {
+    margin-top: 10px;
+    height: 50px;
+    width: 70%;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 21px;
+  }
 `;
 
 const Price = styled.div`
-  float: left;
-  padding: 120px 100px;
+  padding: 105px 70px;
+  font-weight: bold;
+  font-size: 23px;
+  input {
+    margin-top: 10px;
+    height: 30px;
+    width: 40%;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-size: 19px;
+  }
 `;
 
 const ToNextPage = styled.div`
   float: right;
   cursor: pointer;
   margin-right: 40px;
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
+const ToHomeBtn = styled.div`
+  margin-left: 40px;
+  cursor: pointer;
+  float: left;
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export default WriteFirst;

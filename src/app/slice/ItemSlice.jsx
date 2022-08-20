@@ -6,11 +6,15 @@ export const _PostItem = createAsyncThunk(
   "item/post",
   async (value, thunkAPI) => {
     try {
-      const result = await axios.post(`api`, value[1].item, {
-        headers: {
-          Authorization: `Bearer ${value[0].token}`,
-        },
-      });
+      const result = await axios.post(
+        process.env.REACT_APP_URL,
+        value[1].item,
+        {
+          headers: {
+            Authorization: `Bearer ${value[0].token}`,
+          },
+        }
+      );
       return thunkAPI.fulfillWithValue(result.data);
     } catch (error) {
       console.log(error);
