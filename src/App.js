@@ -1,11 +1,12 @@
 import "./App.css";
-import CommentsLayout from "./components/commentsLayout";
-import 'bootstrap/dist/css/bootstrap.min.css';
-function App() {
+import Router from "./shared/Router";
 
-  return <div className='App'>
-    <CommentsLayout/>
-  </div>;
+function App() {
+  return (
+    <div className='App'>
+      <Router />
+    </div>
+  );
 }
 
 export default App;
