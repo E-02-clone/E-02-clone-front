@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import WriteFirst from "./WriteDetail/WriteFirst";
 import WriteSecond from "./WriteDetail/WriteSecond";
 import { _PostItem } from "../app/slice/ItemSlice";
 
 const Write = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [showPage, setShowpage] = useState(true);
 
   const location_ref = useRef(null);
@@ -36,12 +36,15 @@ const Write = () => {
   const PostItem = () => {
     console.log(location, price, category, title, content);
     console.log(array);
-    // dispatch(
-    //   _PostItem([
-    //     { token: "token123" },
-    //     { title, content, content, category, price, location, img: array },
-    //   ])
-    // );
+    dispatch(
+      _PostItem([
+        {
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vya2V5IjoxLCJuaWNrbmFtZSI6ImppbiIsImlhdCI6MTY2MDk4OTkzOCwiZXhwIjoxNjYxMDc2MzM4fQ.inhB9yijoAHm7XZvU-RuC2uZ-AOSkVisxovQvuuUe3M",
+        },
+        { title, content, content, category, price, location, img: array },
+      ])
+    );
   };
 
   return (

@@ -1,15 +1,19 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { _GetItems } from "../app/slice/ItemSlice";
 
 function Detail() {
-  // const dispatch = useDispatch()
-  // const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.ItemSlice.Items);
+  const params = useParams();
+  console.log(state);
 
-  // useEffect(() => {
-  //   dispatch(_GetItems())
-  // }, [])
+  useEffect(() => {
+    dispatch(_GetItems(params.id));
+  }, []);
 
   return (
     <>
