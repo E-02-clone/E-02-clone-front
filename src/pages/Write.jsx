@@ -52,8 +52,8 @@ const Write = () => {
       {showPage ? (
         <WriteFirst
           setShowpage={setShowpage}
-          location_ref={location_ref}
-          price_ref={price_ref}
+          title_ref={title_ref}
+          content_ref={content_ref}
           category_ref={category_ref}
           RememberFFage={RememberFFage}
         />
@@ -61,8 +61,8 @@ const Write = () => {
         <WriteSecond
           setShowpage={setShowpage}
           setArray={setArray}
-          title_ref={title_ref}
-          content_ref={content_ref}
+          location_ref={location_ref}
+          price_ref={price_ref}
           PostItem={PostItem}
           RememberSFage={RememberSFage}
         />

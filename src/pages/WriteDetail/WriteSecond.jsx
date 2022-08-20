@@ -7,8 +7,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 function WriteSecond({
   setArray,
   setShowpage,
-  title_ref,
-  content_ref,
+  location_ref,
+  price_ref,
   RememberSFage,
   PostItem,
 }) {
@@ -69,7 +69,7 @@ function WriteSecond({
   };
 
   const Submit = () => {
-    RememberSFage(title_ref.current.value, content_ref.current.value);
+    RememberSFage(location_ref.current.value, price_ref.current.value);
   };
 
   const WriteDone = async () => {
@@ -87,8 +87,8 @@ function WriteSecond({
     <Background>
       <LeftBicBox>
         <LeftText>이제 숙소 사진을 올릴 차례입니다.</LeftText>
-        <LeftText>숙소 이름을 만들어 주세요.</LeftText>
-        <LeftText>숙소에 대해서 설명해주세요.</LeftText>
+        <LeftText>숙소 위치는 어디인가요?</LeftText>
+        <LeftText>이제 요금을 설정하실 차례입니다.</LeftText>
       </LeftBicBox>
       <RightBicBox>
         <RightTextBox>
@@ -126,26 +126,26 @@ function WriteSecond({
           </Image>
         </RightTextBox>
         <RightTextBox>
-          <Title>
-            <div>TITLE</div>
+          <Location>
+            <div>LOCATION</div>
             <input
-              ref={title_ref}
+              ref={location_ref}
               onChange={() => {
                 Submit();
               }}
             />
-          </Title>
+          </Location>
         </RightTextBox>
         <RightTextBox>
-          <Content>
-            <div>CONTENT</div>
+          <Price>
+            <div>PRICE</div>
             <input
-              ref={content_ref}
+              ref={price_ref}
               onChange={() => {
                 Submit();
               }}
             />
-          </Content>
+          </Price>
           <TwoBtnBox>
             <ToBeforePage
               onClick={() => {
@@ -221,7 +221,7 @@ const DeleteImg = styled.button`
   margin-bottom: 10px;
 `;
 
-const Title = styled.div`
+const Location = styled.div`
   float: left;
   margin-left: 70px;
   margin-top: 100px;
@@ -236,7 +236,7 @@ const Title = styled.div`
   }
 `;
 
-const Content = styled.div`
+const Price = styled.div`
   margin-left: 70px;
   margin-top: -8px;
   font-weight: bold;
