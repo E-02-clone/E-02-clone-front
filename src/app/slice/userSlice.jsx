@@ -12,8 +12,8 @@ const initialState = {
 export const postLogin = createAsyncThunk('/login',
     async (payload, thunkAPI) => {
         try {
-            const { data } = await axios.get(process.env.REACT_APP_URL + '/login')
-            // const {data} = await axios.post(process.env.REACT_APP_URL + '/user/login', payload)
+            // const { data } = await axios.get(process.env.REACT_APP_URL + '/login')
+            const { data } = await axios.post(process.env.REACT_APP_URL + '/user/login', payload)
             const token = data.token
             localStorage.setItem("jwtToken", token);
             setAuthorizationToken(token);
