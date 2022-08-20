@@ -29,13 +29,28 @@ function WriteFirst({
         <RightTextBox>
           <Category name="category">
             <div>category</div>
-            <select
+            {/* <select
               name="job"
               ref={category_ref}
               onChange={() => {
                 Remember();
               }}
             >
+              <option value="기상천외한 숙소">기상천외한 숙소</option>
+              <option value="국립공원">국립공원</option>
+              <option value="통나무집">통나무집</option>
+              <option value="섬">섬</option>
+              <option value="해변 근처">해변 근처</option>
+            </select> */}
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              ref={category_ref}
+              onChange={() => {
+                Remember();
+              }}
+            >
+              <option selected>숙소 유형</option>
               <option value="기상천외한 숙소">기상천외한 숙소</option>
               <option value="국립공원">국립공원</option>
               <option value="통나무집">통나무집</option>
@@ -179,9 +194,8 @@ const Category = styled.div`
   font-weight: bold;
   font-size: 23px;
   select {
-    width: 40%;
-    height: 30px;
-    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid black;
   }
 `;
 

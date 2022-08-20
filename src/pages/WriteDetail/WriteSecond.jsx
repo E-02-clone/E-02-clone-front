@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import S3 from "react-aws-s3";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function WriteSecond({
   setArray,
@@ -11,6 +12,7 @@ function WriteSecond({
   RememberSFage,
   PostItem,
 }) {
+  const Navigate = useNavigate();
   window.Buffer = window.Buffer || require("buffer").Buffer;
   const arr = []; // 사진이 담기는 임시 공간 다시 부모 컴퍼넌트의 array에 담아준다.
   // base64로 인코딩된 데이터 담는곳
@@ -70,8 +72,9 @@ function WriteSecond({
     RememberSFage(title_ref.current.value, content_ref.current.value);
   };
 
-  const WriteDone = () => {
-    PostItem();
+  const WriteDone = async () => {
+    await PostItem();
+    await Navigate("/");
   };
 
   // input감지해 값 저장, 사진 보여주기
@@ -208,6 +211,9 @@ const Image = styled.div`
 const ShowImges = styled.div`
   height: 280px;
   overflow-y: auto;
+  img {
+    margin-bottom: 10px;
+  }
 `;
 
 const DeleteImg = styled.button`
