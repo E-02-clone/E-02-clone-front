@@ -128,10 +128,21 @@ function Detail() {
             숙박장소
           </div>
           {state?.img?.length ? (
-            <SmallPictrueFour src={`${state?.img[1]}`} />
+            <SmallPictrueFour
+              src={`${state?.img[1]}`}
+              style={{
+                width: "70%",
+                borderRadius: "10px",
+              }}
+            />
           ) : null}
           <hr />
-          <img src="/images/Convenient.png" />
+          <img
+            src="/images/Convenient.png"
+            style={{
+              width: "95%",
+            }}
+          />
           <MoreConvenient
             onClick={() => {
               alert("아직 미구현 입니다");
@@ -139,7 +150,13 @@ function Detail() {
           >
             편의시설 모두 보기
           </MoreConvenient>
-          <img src="/images/Calendar.png" alt="Calender" />
+          <img
+            src="/images/Calendar.png"
+            alt="Calender"
+            style={{
+              width: "90%",
+            }}
+          />
         </MiddleLeftBox>
         <MiddleRightBox>
           <StickyTopBox>{state?.price}</StickyTopBox>
@@ -278,12 +295,12 @@ const DescribeTitle = styled.div`
 `;
 
 const MoreConvenient = styled.button`
-  padding: 10px;
-  margin-left: 380px;
+  padding: 11px;
   border: 1px solid black;
   background-color: white;
   border-radius: 9px;
   margin-bottom: 30px;
+  width: 25%;
 `;
 
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ중간 설명 오른쪽부분ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
