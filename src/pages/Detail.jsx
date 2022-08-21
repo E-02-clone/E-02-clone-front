@@ -22,13 +22,43 @@ function Detail() {
         <TitleBottom>
           <TitleBottomLeft>
             <div>★ {state?.star}</div>
-            <div>54개</div>
-            <div>슈퍼호스트</div>
-            <div>{state?.location}</div>
+            <div
+              style={{
+                textDecoration: "underline",
+              }}
+            >
+              54개
+            </div>
+            <div
+              style={{
+                textDecoration: "underline",
+              }}
+            >
+              슈퍼호스트
+            </div>
+            <div
+              style={{
+                textDecoration: "underline",
+              }}
+            >
+              {state?.location}
+            </div>
           </TitleBottomLeft>
           <TitleBottonRight>
-            <div>공유하기</div>
-            <div>♡ 저장</div>
+            <div
+              style={{
+                textDecoration: "underline",
+              }}
+            >
+              공유하기
+            </div>
+            <div
+              style={{
+                textDecoration: "underline",
+              }}
+            >
+              ♡ 저장
+            </div>
           </TitleBottonRight>
         </TitleBottom>
         <AllPictures>
@@ -159,7 +189,21 @@ function Detail() {
           />
         </MiddleLeftBox>
         <MiddleRightBox>
-          <StickyTopBox>{state?.price}</StickyTopBox>
+          <StickyTopBox>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div>
+                <span style={{ fontWeight: "700", fontSize: "1.3em" }}>
+                  ₩ {state?.price}
+                </span>
+                <span style={{ fontSize: "1.1em" }}> / 박</span>
+              </div>
+              <div style={{ marginTop: "5px" }}>
+                <span>★ {state?.star} </span>
+                <span>・ 후기 54개</span>
+              </div>
+            </div>
+            <DayDecideBox>박스</DayDecideBox>
+          </StickyTopBox>
         </MiddleRightBox>
       </MiddleMainBox>
       <Comment>댓글창</Comment>
@@ -173,7 +217,7 @@ const Head = styled.div`
 `;
 
 const TopMainBox = styled.div`
-  width: 80%;
+  width: 73%;
   margin: 0px auto 0px auto;
 `;
 
@@ -273,7 +317,7 @@ const SmallPictrueFour = styled.img`
 
 const MiddleMainBox = styled.div`
   display: flex;
-  width: 80%;
+  width: 73%;
   margin: 20px auto 0px auto;
 `;
 
@@ -306,10 +350,21 @@ const MoreConvenient = styled.button`
 // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ중간 설명 오른쪽부분ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 const StickyTopBox = styled.div`
   position: sticky;
-  background-color: #c7c998;
-  height: 300px;
-  padding-top: 30px;
+  height: 460px;
   top: 30px;
+  padding: 24px;
+
+  border: 1px solid lightgray;
+  border-radius: 10px;
+`;
+
+const DayDecideBox = styled.div`
+  width: 99%;
+  height: 100px;
+  margin: 20px auto;
+  padding: 5px;
+  border: 1px solid #a5a5a5;
+  border-radius: 10px;
 `;
 
 const Comment = styled.div`
