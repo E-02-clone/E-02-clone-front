@@ -60,7 +60,6 @@ const Modal = ({ closeModal }) => {
 
     console.log(host.current?.value);
 
-
     if (mode === "login") {
         return (
             <OpenModal>

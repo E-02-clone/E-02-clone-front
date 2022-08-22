@@ -1,32 +1,51 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getCommentsThunk } from "../app/slice/writeSlice";
+import { useParams } from "react-router-dom";
+
 import './css/comments.css'
 
 const Comments = () => {
-
     
+    const dispatch = useDispatch();
+    const params = useParams();
 
+    const comments = useSelector((state)=>
+    state.writeSlice
+);
+
+useEffect(()=>{
+    dispatch(getCommentsThunk(params.id))
+},[dispatch])
+
+   
+
+//console.log(comments[0].map((a,b)=>a.commentkey))
+
+// console.log(comments)
+// const eachComment = comments[0].map((a,b)=>(a.comment))
+// console.log(eachComment)
+// const eachStar = comments[0].map((a,b)=>a.star)
+// console.log(eachStar) 
+// const date = comments[0].map((a,b)=>a.updatedAt)
+// console.log(date)
+// const userkey = comments[0].map((a,b)=> a.userkey)
+// console.log(userkey)
+    
     return (
         <div className="commentsContainer">
-        <section className="comments">
-        <h3>작성자</h3>
-        <h4>년월</h4>
-        <h5 className="commentBox" > is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</h5>
-        </section>
-        <section className="comments">
-        <h3>작성자</h3>
-        <h4>년월</h4>
-        <h5 className="commentBox"> is simply duus PageMaker including versions of Lorem Ipsum.</h5>
-        </section>
-        <section className="comments">
-        <h3>작성자</h3>
-        <h4>년월</h4>
-        <h5 className="commentBox"> </h5>
-        </section>
-        <section className="comments">
-        <h3>작성자</h3>
-        <h4>년월</h4>
-        <h5 className="commentBox"> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum </h5>
-        </section>
+        {comments?.data?.map((a)=> {
+            return(
+            <section key={a.commentkey} className="comments">
+            <h5>작성자:{a.userkey}</h5>
+            <h5>평점:{a.star}점</h5>
+            <h6>날짜:{a.updatedAt}</h6>
+            <h5 className="commentBox">{a.comment}</h5>
+            
+            </section>
+            )
+        })
+        }
         </div>
     )
 };

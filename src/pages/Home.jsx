@@ -9,7 +9,6 @@ import Footer from '../components/common/Footer';
 
 const Home = () => {
     const [select, setSelect] = useState('전체보기');
-    console.log(select)
     return (
         <>
             <Header />
