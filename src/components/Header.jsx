@@ -17,7 +17,6 @@ const Header = () => {
     };
 
     const [dropbox, setDropbox] = useState(false)
-
     if (!openSearchBar) {
         return (
             <>

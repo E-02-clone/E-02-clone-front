@@ -12,9 +12,10 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
 const ItemList = ({ select }) => {
     const items = useSelector(state => state.main.data?.data)
-    // const like = useSelector(state => state.main.data?.data)
     const like = useSelector(state => state.main.data?.likes)
+
     const dispatch = useDispatch()
+
     const settings = {
         dots: false,
         infinite: true,
@@ -23,7 +24,8 @@ const ItemList = ({ select }) => {
         slidesToScroll: 1
     };
 
-    console.log(like)
+    console.log(items)
+
     useEffect(() => {
         dispatch(getMainItems())
     }, [dispatch])
@@ -159,10 +161,6 @@ const LikeLine = styled.div`
 const LikeBox = styled.div`
     cursor: pointer;
 
-    /* transition: 0.2s all;
-    &:active {
-        transform: scale(0.85)
-    } */
 `
 
 const Item = styled.div`
