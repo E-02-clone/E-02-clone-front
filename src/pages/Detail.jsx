@@ -41,7 +41,7 @@ function Detail() {
           auth={state?.auth}
           category={state?.category}
           content={state?.content}
-          img2={state?.img[1]}
+          img2={state?.img?.length ? state?.img[1] : null}
         />
         <DetailDescRight price={state?.price} star={state?.star} />
       </MiddleMainBox>

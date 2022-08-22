@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import copyURL from "../../utils/copyURL";
 
 function DetailTitle({ title, star, location }) {
   return (
@@ -32,15 +33,23 @@ function DetailTitle({ title, star, location }) {
         </TitleBottomLeft>
         <TitleBottonRight>
           <div
+            onClick={() => {
+              copyURL();
+            }}
             style={{
               textDecoration: "underline",
+              cursor: "pointer",
             }}
           >
             공유하기
           </div>
           <div
+            onClick={() => {
+              alert("아직 미구현 입니다.");
+            }}
             style={{
               textDecoration: "underline",
+              cursor: "pointer",
             }}
           >
             ♡ 저장
