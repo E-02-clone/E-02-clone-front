@@ -13,6 +13,7 @@ const Home = () => {
     return (
         <>
             <Header setSelect={setSelect} />
+            <Category setSelect={setSelect} />
             <Layout>
                 <ItemList select={select} />
             </Layout>

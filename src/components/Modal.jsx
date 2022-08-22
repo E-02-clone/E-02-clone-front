@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { postLogin } from '../app/slice/userSlice';
+import { postLogin, postJoin } from '../app/slice/userSlice';
 import { isId, isPassword, isNickname, isEmail } from '../utils/regExpLogin';
 import { Link, useNavigate } from 'react-router-dom';
 const Modal = ({ closeModal }) => {
@@ -13,10 +13,52 @@ const Modal = ({ closeModal }) => {
     console.log(user)
     const userId = useRef();
     const password = useRef();
-    const [checkId, setCheckId] = useState('')
+    const comfirm = useRef();
+    const nickname = useRef();
+    const email = useRef();
+    const host = useRef();
 
+    const [checkId, setCheckId] = useState(null);
+    const [checkNickname, setCheckNickname] = useState(null);
+    const [checkPassword, setCheckPassword] = useState(null);
+    const [checkComfirm, setCheckComfirm] = useState('');
+    const [checkEmail, setCheckEmail] = useState(null);
+    const [checkHost, setCheckHost] = useState(true);
 
+    const validateData = (e, data) => {
 
+    }
+
+    const submitJoin = (e) => {
+        e.preventDefault();
+        if (checkId !== true) {
+            userId.current.focus()
+        } else if (checkNickname !== true) {
+            nickname.current.focus()
+        } else if (checkPassword !== true) {
+            password.current.focus()
+        } else if (password.current.value !== checkComfirm) {
+            comfirm.current.focus()
+        } else if (checkEmail !== true) {
+            email.current.focus()
+        } else if (host.current?.value === "none") {
+            host.current.focus()
+            setCheckHost(false);
+        } else {
+            alert('회원가입에 성공하셨습니다 !')
+            dispatch(postJoin({
+                userId: userId.current.value,
+                nickname: nickname.current.value,
+                password: password.current.value,
+                comfirm: comfirm.current.value,
+                email: email.current.value,
+                host: host.current.value
+            }))
+            setMode('login')
+        }
+    }
+
+    console.log(host.current?.value);
 
 
     if (mode === "login") {
@@ -56,30 +98,75 @@ const Modal = ({ closeModal }) => {
                     </header>
 
                     <JoinForm>
-                        <input type="text" className="input_id" placeholder='아이디' autoFocus onBlur={(e) => {
-                            setCheckId(e.target.value)
+                        <input type="text" className="input_id" placeholder='아이디' ref={userId} autoFocus onChange={(e) => {
+                            isId(e.target.value) ? setCheckId(true) : setCheckId(false)
                         }} />
-                        {checkId !== '' && isId(checkId) ? dispatch() : <div color="red">6~12자, 영문을 포함하고 숫자와 일부 특수문자(._-) 입력 가능</div>}
-                        <input type="text" className="input_id" placeholder='닉네임' onBlur={() => {
-
+                        {
+                            checkId === null ?
+                                <div className='init'>6~12자의 영문 소문자, 숫자와 특수기호(._-)만 사용 가능합니다.</div>
+                                :
+                                checkId ?
+                                    <div className='success'>사용 가능한 아이디입니다.</div>
+                                    :
+                                    <div className='fail'>아이디를 확인해주세요. 6~12자, 영문을 포함하고 숫자와 일부 특수문자(._-) 입력 가능</div>
+                        }
+                        <input type="text" className="input_nickname" placeholder='닉네임' ref={nickname} onChange={(e) => {
+                            isNickname(e.target.value) ? setCheckNickname(true) : setCheckNickname(false)
                         }} />
-                        <input type="text" className="input_pw" placeholder='패스워드' onBlur={() => {
-
+                        {
+                            checkNickname === null ?
+                                <div className='init'>2~6자, 영문과 한글 입력 가능</div>
+                                :
+                                checkNickname ?
+                                    <div className='success'>사용 가능한 닉네임입니다.</div>
+                                    :
+                                    <div className='fail'>닉네임을 확인해주세요. 2~6자, 영문과 한글 입력 가능</div>
+                        }
+                        <input type="password" className="input_pw" placeholder='비밀번호' ref={password} onChange={(e) => {
+                            isPassword(e.target.value) ? setCheckPassword(true) : setCheckPassword(false)
                         }} />
-                        <input type="text" className="input_pw" placeholder='패스워드 확인' onBlur={() => {
-
+                        {
+                            checkPassword === null ?
+                                <div className='init'>8~20자, 영문과 숫자를 포함하고 일부 특수문자(!@#$%^&*) 입력 가능</div>
+                                :
+                                checkPassword ?
+                                    <div className='success'>사용 가능한 비밀번호입니다.</div>
+                                    :
+                                    <div className='fail'>비밀번호를 확인해주세요!</div>
+                        }
+                        <input type="password" className="input_pw" placeholder='비밀번호 확인' ref={comfirm} onChange={(e) => {
+                            setCheckComfirm(e.target.value)
                         }} />
-                        <input type="text" className="input_pw" placeholder='이메일' onBlur={() => {
-
+                        {
+                            checkComfirm === '' ?
+                                <div className='init'>비밀번호를 입력해주세요.</div>
+                                :
+                                checkComfirm === password.current.value ?
+                                    <div className='success'>비밀번호가 일치합니다.</div>
+                                    :
+                                    <div className='fail'>비밀번호를 확인해주세요!</div>
+                        }
+                        <input type="text" className="input_email" placeholder='이메일' ref={email} onChange={(e) => {
+                            isEmail(e.target.value) ? setCheckEmail(true) : setCheckEmail(false)
                         }} />
-                        <select name="" id="" required>
-                            <option value="none">--당신은 호스트인가요?--</option>
-                            <option value="true">맞습니다.</option>
-                            <option value="false">아닙니다.</option>
+                        {
+                            checkEmail === null ?
+                                <div className='init'>이메일을 입력해주세요.</div>
+                                :
+                                checkEmail ?
+                                    <div className='success'>사용 가능한 이메일입니다.</div>
+                                    :
+                                    <div className='fail'>이메일을 확인해주세요!</div>
+                        }
+                        <select name="" id="" ref={host}>
+                            <option value="none" className="select__init">--당신은 호스트인가요?--</option>
+                            <option value={true}>맞습니다.</option>
+                            <option value={false}>아닙니다.</option>
                         </select>
-                        <JoinButton onSubmit={(e) => {
-                            e.preventDefault();
-                        }}>가입하기</JoinButton>
+                        {
+                            !checkHost && <div className='fail'>옵션을 선택해주세요.</div>
+                        }
+                        <JoinButton onClick={submitJoin}>가입하기</JoinButton>
                     </JoinForm>
                 </JoinModal>
             </>
@@ -212,7 +299,7 @@ const JoinForm = styled.form`
     padding: 24px;
     padding-top: 0;
     input {
-        margin-top: 30px;
+        margin-top: 10px;
         border-radius: 20px;
         border: 1px solid lightgray;
         height: 56px;
@@ -224,7 +311,7 @@ const JoinForm = styled.form`
     }
     select {
         width: 100%;
-        margin-top: 30px;
+        margin-top: 10px;
         height: 56px;
         padding-left: 24px;
         color: gray;
@@ -234,6 +321,24 @@ const JoinForm = styled.form`
     }
     select:focus {
         outline: none;
+    }
+    div {
+        width: 100%;
+        padding-left: 24px;
+        margin-top: 10px;
+        font-size: 12px;
+    }
+    .init {
+        color: gray;
+    }
+    .success {
+        color: #00a600;
+    }
+    .fail {
+        color: red;
+    }
+    .select__init {
+        display: none;
     }
 `
 
@@ -256,5 +361,5 @@ const JoinButton = styled.button`
     background-color:#e11a60;
     color: white;
     font-weight: bold;
-    margin-top: 30px;
+    margin-top: 18px;
 `
