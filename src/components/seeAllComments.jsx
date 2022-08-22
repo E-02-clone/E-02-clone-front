@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { getCommentsThunk, deleteCommentsThunk, putCommentsThunk } from "../app/slice/writeSlice";
 import './css/seeAllComments.css'
 
+
+//테스트용주석
 const SeeAllComments = (props) => {
     const dispatch = useDispatch();
     const params = useParams();
