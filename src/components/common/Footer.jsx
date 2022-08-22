@@ -19,6 +19,9 @@ const Footer = () => {
 export default Footer;
 
 const FooterBar = styled.div`
+
+    z-index:20;
+
     position: fixed;
     bottom: 0;
     width: 100%;

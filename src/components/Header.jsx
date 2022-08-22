@@ -17,21 +17,45 @@ const Header = ({ setSelect }) => {
         setModal(false);
     };
 
-    console.log(modal);
+
+    const [dropbox, setDropbox] = useState(false)
+
     if (!openSearchBar) {
         return (
             <>
-                <Head>
-                    <HeaderBar>
+                <Head mode="normal">
+                    <HeaderBar mode="normal">
                         <LogoButton>
                             <Logo
                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/640px-Airbnb_Logo_B%C3%A9lo.svg.png"
                                 alt="logo"
                                 width="100em"
+
+                                onClick={() => {
+                                    window.location.replace('/')
+                                }}
                             />
                         </LogoButton>
-                        <Search>
-                            <SearchBar>
+                        <HeaderRight className='header__right'>
+                            <HeaderButton>호스트 되기</HeaderButton>
+                            <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
+                            <LoginButton onClick={() => {
+                                setDropbox(!dropbox)
+                            }}>
+                                <span className="bars"><FontAwesomeIcon icon={faBars} /></span>
+                                <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
+                                <Dropbox open={dropbox}>
+                                    <div onClick={openModal}>로그인</div>
+                                </Dropbox>
+                            </LoginButton>
+                            {/* {localStorage.getItem("jwtToken") === null */}
+                        </HeaderRight>
+                    </HeaderBar>
+                    <MoreSearchBar mode="normal">
+                        <Search >
+                            <SearchBar mode="normal" onClick={() => {
+                                setOpenSearchBar(true)
+                            }}>
                                 <div>
                                     <span className="search where">어디든지</span>
                                     <span className="search when">언제든 일주일</span>
@@ -40,6 +64,28 @@ const Header = ({ setSelect }) => {
                                 <button><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                             </SearchBar>
                         </Search>
+
+                    </MoreSearchBar>
+                </Head>
+                <Background mode="normal" />
+                {modal ? <Modal closeModal={closeModal} /> : null}
+            </>
+        );
+    } else {
+        return (
+            <>
+                <Head mode="search">
+                    <HeaderBar mode="search">
+                        <LogoButton>
+                            <Logo
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/640px-Airbnb_Logo_B%C3%A9lo.svg.png"
+                                alt="logo"
+                                width="100em"
+                                onClick={() => {
+                                    window.location.replace('/')
+                                }}
+                            />
+                        </LogoButton>
                         <HeaderRight className='header__right'>
                             <HeaderButton>호스트 되기</HeaderButton>
                             <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
@@ -48,11 +94,28 @@ const Header = ({ setSelect }) => {
                                 <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
                             </LoginButton>
                         </HeaderRight>
-                    </HeaderBar>
-                    <Category setSelect={setSelect} />
-                </Head>
-                {modal ? <Modal closeModal={closeModal} /> : null}
 
+
+                    </HeaderBar>
+                    <MoreSearchBar mode="search">
+                        <Search mode="search">
+                            <SearchBar mode="search" onClick={() => {
+                                setOpenSearchBar(false)
+                            }}>
+                                <div>
+                                    <span className="search where">어디든지</span>
+                                    <span className="search when">언제든 일주일</span>
+                                    <span>게스트 추가</span>
+                                </div>
+                                <button onClick={() => {
+                                    // setOpenSearchBar(false);
+                                }}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                            </SearchBar>
+                        </Search>
+                    </MoreSearchBar>
+                </Head>
+                <Background mode="search" />
+                {modal ? <Modal closeModal={closeModal} /> : null}
             </>
         );
     }
@@ -60,24 +123,92 @@ const Header = ({ setSelect }) => {
 
 export default Header;
 
+
+const Dropbox = styled.div`
+    position: absolute;
+    border-radius: 20px;
+    box-shadow: 0 1px 5px 0 rgb(190, 190, 190);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    font-weight: bold;
+    font-size: 18px;
+    width: 230px;
+    height: 50px;
+    /* opacity: 0.3; */
+    background-color:white;
+    z-index: 11;
+    top:50px;
+    right:0;
+    overflow: hidden;
+    display: ${(prop) => prop.open ? "block" : "none"};
+    div {
+        width: 100%;
+        padding: 5px 0 ;
+    }
+    div:hover {
+        background-color: #f7f7f7;
+    }
+`
+
+const Background = styled.div`
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    background-color:black;
+    opacity: 0.3;
+    z-index: 3;
+    position: absolute;
+    transition: 0.2s ease-in;
+    display: ${(prop) => prop.mode === "normal" ? "none" : "block"};
+`
+
+const MoreSearchBar = styled.div`
+    width: 100%;
+    left: 0;
+    height: 80px;
+    background-color: white;
+    border-bottom: 1px solid  rgb(240, 240, 240);
+    position: absolute;
+    z-index: 4;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s ease-in;
+    top: ${(props) => props.mode === "normal" ? "0" : "80px"};
+`
+
 const Head = styled.div`
-background-color: white;
+    background-color: white;
     position: sticky;
     top: 0;
+    left: 0;
     z-index: 5;
+    padding: 0 160px;
+
 `
 const HeaderRight = styled.div`
     display: flex; 
     align-items: center;
     justify-content: center;
 
+    z-index: 10;
 `
 const Logo = styled.img`
     object-fit: contain;
+    cursor: pointer;
+
 `
 
 const LogoButton = styled.div`
     width: 30em;
+
+    z-index: 10;
+
 `
 
 const HeaderButton = styled.button`
@@ -94,6 +225,10 @@ const HeaderButton = styled.button`
 `
 const Search = styled.div`
     width: 37em;
+
+    z-index: 5;
+
+
 `
 
 const LoginButton = styled.button`
@@ -101,6 +236,9 @@ const LoginButton = styled.button`
     display:flex;
     align-items: center;
     justify-content:center;
+
+    position:relative;
+
     width: 84px;
     height: 42px;
     border-radius: 42px;
@@ -125,15 +263,19 @@ const HeaderBar = styled.div`
     display: flex;
     align-items:center;
     justify-content: space-between;
-    padding: 0 80px;
-    border-bottom: 1px solid  rgb(240, 240, 240);
+
+    background-color: white;
     z-index: 5;
+    transition: 0.2s ease-in;
+
     img{
         height: 36px;
     }
 `
 
-const SearchBar = styled.button`
+
+const SearchBar = styled.div`
+
     width: 400px;
     height: 48px;
     border-radius: 48px;
