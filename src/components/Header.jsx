@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from './Modal';
+import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faGlobe, faBars, faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { logoutUser } from '../app/slice/userSlice';
 
-const Header = () => {
-    const [modal, setModal] = useState(false);
+const Header = ({ modal, setModal }) => {
+    const dispatch = useDispatch()
     const [openSearchBar, setOpenSearchBar] = useState(false)
-
+    const onLogoutHandler = () => {
+        const confirm = window.confirm("로그아웃 하시겠습니까?");
+        if (confirm) {
+            dispatch(logoutUser());
+            window.location.replace("/");
+        }
+    };
     const openModal = () => {
         setModal(true);
     };
@@ -43,10 +51,15 @@ const Header = () => {
                                 <span className="bars"><FontAwesomeIcon icon={faBars} /></span>
                                 <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
                                 <Dropbox open={dropbox}>
-                                    <div onClick={openModal}>로그인</div>
+                                    {localStorage.getItem("jwtToken") === null ?
+                                        <div onClick={openModal}>로그인</div>
+                                        :
+                                        <div onClick={onLogoutHandler}>로그아웃</div>
+                                    }
                                 </Dropbox>
                             </LoginButton>
                             {/* {localStorage.getItem("jwtToken") === null */}
+
                         </HeaderRight>
                     </HeaderBar>
                     <MoreSearchBar mode="normal">
@@ -130,10 +143,11 @@ const Dropbox = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content:center;
+    margin: auto auto;
     font-weight: bold;
     font-size: 18px;
     width: 230px;
-    height: 50px;
+    /* height: 50px; */
     /* opacity: 0.3; */
     background-color:white;
     z-index: 11;
@@ -288,8 +302,11 @@ const SearchBar = styled.div`
     }
 
     span {
+        border: none;
         padding: 0 16px;
+        background-color: transparent;
         color: gray;
+        border-radius: 0;
     }
     button {
         border: 0;

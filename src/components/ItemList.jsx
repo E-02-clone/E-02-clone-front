@@ -11,9 +11,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidFaHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
-const ItemList = ({ select }) => {
+const ItemList = ({ select, modal, setModal }) => {
     const items = useSelector(state => state.main.data?.data)
     const like = useSelector(state => state.main.data?.likes)
+    const loginConfirm = () => {
+        const confirm = window.confirm("로그인 후 이용 가능합니다. 로그인 하시겠습니까?");
+        if (confirm) {
+            setModal(true);
+        }
+    };
 
     const dispatch = useDispatch()
 
@@ -39,7 +45,6 @@ const ItemList = ({ select }) => {
                     console.log(item)
                     return (
                         <Item key={item.itemkey}>
-
                             <Link to={`/detail/${item.itemkey}`}>
                                 <Slider {...settings}>
                                     {item.img.map((item) => {
@@ -50,7 +55,11 @@ const ItemList = ({ select }) => {
                                 </Slider>
                             </Link>
                             <LikeBox onClick={() => {
-                                dispatch(setLike(item.itemkey))
+                                localStorage.getItem("jwtToken") === null
+                                    ?
+                                    loginConfirm()
+                                    :
+                                    dispatch(setLike(item.itemkey))
                             }}>
                                 <LikeLine>
                                     <FontAwesomeIcon icon={faHeart} />

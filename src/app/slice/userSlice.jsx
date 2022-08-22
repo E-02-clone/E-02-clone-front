@@ -40,8 +40,6 @@ export const postJoin = createAsyncThunk('/join',
 )
 
 
-
-
 const userSlice = createSlice({
     name: "userSlice",
     initialState,
@@ -49,7 +47,11 @@ const userSlice = createSlice({
         currentUser: (state, action) => {
             state.user = action.payload
             state.isAuth = true
-        }
+        },
+        logoutUser: (state, action) => {
+            state = initialState;
+            localStorage.removeItem("jwtToken");
+        },
     },
     extraReducers: {
 
@@ -57,4 +59,4 @@ const userSlice = createSlice({
 });
 
 export default userSlice;
-export const { currentUser } = userSlice.actions;
+export const { currentUser, logoutUser } = userSlice.actions;

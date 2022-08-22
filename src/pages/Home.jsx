@@ -10,12 +10,13 @@ import Footer from '../components/common/Footer';
 
 const Home = () => {
     const [select, setSelect] = useState('전체보기');
+    const [modal, setModal] = useState(false);
     return (
         <>
-            <Header />
+            <Header modal={modal} setModal={setModal} />
             <Category setSelect={setSelect} />
             <Layout>
-                <ItemList select={select} />
+                <ItemList select={select} modal={modal} setModal={setModal} />
             </Layout>
             <Footer />
 
