@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -7,16 +7,22 @@ import DetailTitle from "../components/DetailDetail/DetailTitle";
 import DetailPicture from "../components/DetailDetail/DetailPicture";
 import DetailDescLift from "../components/DetailDetail/DetailDescLeft";
 import DetailDescRight from "../components/DetailDetail/DetailDescRight";
+import MorePictures from "../components/DetailDetail/MorePictures";
 
 function Detail() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.ItemSlice.Items);
   const params = useParams();
+  const [ModalShow, setModalShow] = useState("none");
   console.log(state);
 
   useEffect(() => {
     dispatch(_GetItems(params.id));
   }, []);
+
+  const showModal = () => {
+    setModalShow("");
+  };
 
   return (
     <>
@@ -33,6 +39,7 @@ function Detail() {
             img3={state?.img[2]}
             img4={state?.img[3]}
             img5={state?.img[4]}
+            showModal={showModal}
           />
         ) : null}
       </TopMainBox>
@@ -45,7 +52,8 @@ function Detail() {
         />
         <DetailDescRight price={state?.price} star={state?.star} />
       </MiddleMainBox>
-      <hr style={{ marginTop: "60px" }} />
+      <CommetLine />
+      <MorePictures ModalShow={ModalShow} setModalShow={setModalShow} />
       <Comment>댓글창</Comment>
     </>
   );
@@ -68,5 +76,12 @@ const Comment = styled.div`
   background-color: #99d1aa;
   width: 100%;
   height: 500px;
+`;
+
+const CommetLine = styled.hr`
+  margin-top: 70px;
+  width: 73%;
+  margin-left: auto;
+  margin-right: auto;
 `;
 export default Detail;
