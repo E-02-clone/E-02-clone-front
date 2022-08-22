@@ -27,15 +27,15 @@ const Write = () => {
 
   function RememberFFage(i, j, k) {
     setCategory(i);
-    setLocation(j);
-    setPrice(k);
+    setTitle(j);
+    setContent(k);
   }
 
   // console.log(reallocation?.state?.id);
 
   const RememberSFage = (i, j) => {
-    setTitle(i);
-    setContent(j);
+    setLocation(i);
+    setPrice(j);
   };
 
   const GetedToken =

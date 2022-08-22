@@ -112,7 +112,7 @@ function WriteFirst({
           <Title>
             <div>TITLE</div>
             <textarea
-              maxLength="20"
+              maxLength="50"
               ref={title_ref}
               onChange={() => {
                 Remember();
