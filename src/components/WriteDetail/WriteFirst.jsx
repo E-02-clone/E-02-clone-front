@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function WriteFirst({
@@ -10,6 +10,7 @@ function WriteFirst({
   RememberFFage,
 }) {
   const navigate = useNavigate();
+  const location = useLocation();
   // 인풋값 기억, 가격 유효성 검사.
   const Remember = () => {
     RememberFFage(
@@ -111,6 +112,7 @@ function WriteFirst({
           <Title>
             <div>TITLE</div>
             <textarea
+              maxLength="20"
               ref={title_ref}
               onChange={() => {
                 Remember();
@@ -122,6 +124,7 @@ function WriteFirst({
           <Content>
             <div>CONTENT</div>
             <textarea
+              maxLength="250"
               ref={content_ref}
               onChange={() => {
                 Remember();

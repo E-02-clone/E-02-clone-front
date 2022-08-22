@@ -1,8 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import { keyframes } from "styled-components";
+import copyURL from "../../utils/copyURL";
 
-function MorePictures({ ModalShow, setModalShow }) {
+function MorePictures({ ModalShow, setModalShow, img }) {
+  let forkey = [];
+  const makekey = () => {
+    img.map((value) => {
+      const forpush = value.slice(76, 83);
+      forkey.push(forpush);
+      return forkey;
+    });
+  };
+
   return (
     <Background style={{ display: `${ModalShow}` }}>
       <ModalContainer style={{ display: `${ModalShow}` }}>
@@ -20,18 +30,26 @@ function MorePictures({ ModalShow, setModalShow }) {
           >
             〈
           </button>
-          <div style={{ display: "flex" }}>
-            <Btns>공유하기</Btns>
-            <Btns>♡ 하트</Btns>
-          </div>
+
+          <Btns
+            onClick={() => {
+              copyURL();
+            }}
+          >
+            공유하기
+          </Btns>
+          <Btns>♡ 하트</Btns>
         </ThreeBtn>
         <ImagesBox>
-          <div>이미지들</div>
-          <div>이미지들</div>
-          <div>이미지들</div>
-          <div>이미지들</div>
-          <div>이미지들</div>
-          <div>이미지들</div>
+          {img?.length &&
+            img.map((value) => {
+              return (
+                <Images
+                  src={`${value}`}
+                  key={value[79] + value[81] + value[82]}
+                />
+              );
+            })}
         </ImagesBox>
       </ModalContainer>
     </Background>
@@ -39,9 +57,15 @@ function MorePictures({ ModalShow, setModalShow }) {
 }
 
 const ThreeBtn = styled.div`
-  display: flex;
-  justify-content: space-between;
+  position: fixed;
   margin-bottom: 50px;
+  width: 95%;
+`;
+
+const Images = styled.img`
+  width: 100%;
+  height: 100%;
+  margin-bottom: 15px;
 `;
 
 const Btns = styled.div`
@@ -49,23 +73,25 @@ const Btns = styled.div`
   margin-left: 30px;
   margin-right: 10px;
   text-decoration: underline;
+  float: right;
+  cursor: pointer;
 `;
 
 const ImagesBox = styled.div`
   width: 50%;
   margin-left: auto;
   margin-right: auto;
-  background-color: skyblue;
 `;
 
 const Background = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0);
   z-index: 0;
+  overflow-y: auto;
 `;
 
 const modalShowKF = keyframes`
@@ -80,9 +106,6 @@ const modalShowKF = keyframes`
 `;
 
 const ModalContainer = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100%;
   padding: 20px;
   background: white;
   transition: all 300ms ease-in;

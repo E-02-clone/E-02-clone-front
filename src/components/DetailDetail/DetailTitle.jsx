@@ -1,11 +1,59 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import copyURL from "../../utils/copyURL";
+import { _DeleteItem } from "../../app/slice/ItemSlice";
 
 function DetailTitle({ title, star, location }) {
+  const params = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // console.log(params.id);
+
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vya2V5IjoxLCJuaWNrbmFtZSI6ImppbiIsImlhdCI6MTY2MTE1NTAzMCwiZXhwIjoxNjYxMjQxNDMwfQ.Mo4r0YvWVN5QL7iJhV2Fuzx14MzuzmkOGT-WDk_Owhw";
+
+  const deleteitem = async () => {
+    await dispatch(_DeleteItem([{ key: params.id }, { token }]));
+    await navigate("/");
+  };
+
+  const editDetail = () => {
+    navigate("/write", { state: { id: params.id, edit: true } });
+  };
+
   return (
     <div>
-      <TitleTop>{title}</TitleTop>
+      <TitleAlign>
+        <TitleTop>{title}</TitleTop>
+        <DeletePutBtn>
+          <span
+            onClick={() => {
+              editDetail();
+            }}
+            style={{
+              marginRight: "45px",
+              textDecoration: "underline",
+              cursor: "pointer",
+            }}
+          >
+            수정
+          </span>
+          <span
+            onClick={() => {
+              deleteitem();
+            }}
+            style={{
+              marginRight: "8px",
+              textDecoration: "underline",
+              cursor: "pointer",
+            }}
+          >
+            삭제
+          </span>
+        </DeletePutBtn>
+      </TitleAlign>
       <TitleBottom>
         <TitleBottomLeft>
           <div>★ {star}</div>
@@ -68,6 +116,15 @@ const TitleTop = styled.div`
   font-weight: 600 !important;
   margin: 0px !important;
   display: inline !important;
+`;
+
+const TitleAlign = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const DeletePutBtn = styled.div`
+  margin-top: 12px;
 `;
 
 const TitleBottom = styled.div`

@@ -53,7 +53,11 @@ function Detail() {
         <DetailDescRight price={state?.price} star={state?.star} />
       </MiddleMainBox>
       <CommetLine />
-      <MorePictures ModalShow={ModalShow} setModalShow={setModalShow} />
+      <MorePictures
+        ModalShow={ModalShow}
+        setModalShow={setModalShow}
+        img={state.img}
+      />
       <Comment>댓글창</Comment>
     </>
   );

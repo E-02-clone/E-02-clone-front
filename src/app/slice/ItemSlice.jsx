@@ -6,7 +6,6 @@ export const _PostItem = createAsyncThunk(
   "item/post",
   async (value, thunkAPI) => {
     try {
-      console.log(value);
       const result = await axios.post(
         process.env.REACT_APP_URL + "/item",
         value[1],
@@ -18,7 +17,7 @@ export const _PostItem = createAsyncThunk(
       );
       return thunkAPI.fulfillWithValue(result.data);
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 );
@@ -27,13 +26,44 @@ export const _GetItems = createAsyncThunk(
   "item/get",
   async (value, thunkAPI) => {
     try {
-      console.log(value);
       const response = await axios.get(
         process.env.REACT_APP_URL + `/item/${value}`
       );
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
-      console.log(error);
+      return error;
+    }
+  }
+);
+
+export const _PutItem = createAsyncThunk(
+  "item/put",
+  async (value, thunkAPI) => {
+    try {
+      const response = await axios.put(
+        process.env.REACT_APP_URL + `/item/${value[2].key}`,
+        value[1],
+        { headers: { Authorization: `Bearer ${value[0].token}` } }
+      );
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
+export const _DeleteItem = createAsyncThunk(
+  "item/delete",
+  async (value, thunkAPI) => {
+    console.log(value);
+    try {
+      const response = await axios.delete(
+        process.env.REACT_APP_URL + `/item/${value[0].key}`,
+        { headers: { Authorization: `Bearer ${value[1].token}` } }
+      );
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return error;
     }
   }
 );
@@ -62,6 +92,21 @@ export const ItemSlice = createSlice({
     },
     [_GetItems.rejected]: (state, action) => {
       console.log(action);
+    },
+
+    [_PutItem.fulfilled]: (state, action) => {
+      console.log(current(state));
+      console.log(action);
+    },
+    [_PutItem.rejected]: (state, action) => {
+      console.log(action);
+    },
+
+    [_DeleteItem.fulfilled]: (state, aciton) => {
+      console.log(current(state), aciton.payload);
+    },
+    [_DeleteItem.rejected]: (state, aciton) => {
+      console.log(aciton);
     },
   },
 });

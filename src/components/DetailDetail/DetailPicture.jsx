@@ -37,7 +37,7 @@ const AllPictures = styled.div`
 
 const PictureBicBox = styled.img`
   width: 49%;
-  margin-right: 1%;
+  margin-right: 0.5%;
   height: 480px;
   background-color: #e09f27;
   border-top-left-radius: 10px;
@@ -47,7 +47,7 @@ const PictureBicBox = styled.img`
 const PictureSmallBox = styled.div`
   display: flex;
   width: 49%;
-  margin-left: 1%;
+  margin-left: 0.5%;
   height: 498px;
 
   border-top-right-radius: 10px;
@@ -58,7 +58,7 @@ const PictureSmallBox = styled.div`
 const SmallPictureOne = styled.img`
   margin: auto;
 
-  width: 48%;
+  width: 49%;
   height: 46%;
   margin-top: 3px;
 `;
@@ -66,7 +66,7 @@ const SmallPictureOne = styled.img`
 const SmallPictureTwo = styled.img`
   margin: auto;
 
-  width: 48%;
+  width: 49%;
   height: 46%;
   margin-top: 3px;
   border-top-right-radius: 10px;
@@ -75,23 +75,24 @@ const SmallPictureTwo = styled.img`
 const SmallPictureThree = styled.img`
   margin: auto;
 
-  width: 48%;
+  width: 49%;
   height: 46%;
-  margin-top: 2px;
+  margin-top: 1px;
 `;
 
 const SmallPictrueFour = styled.img`
   margin: auto;
 
-  width: 48%;
+  width: 49%;
   height: 46%;
-  margin-top: 2px;
+  margin-top: 1px;
   border-bottom-right-radius: 10px;
 `;
 
 const MorePictureBtn = styled.button`
   position: absolute;
-  right: 15%;
+  right: 16%;
+  bottom: 27%;
   background-color: white;
   padding: 5px;
   border-radius: 10px;

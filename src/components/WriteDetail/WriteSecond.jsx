@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import S3 from "react-aws-s3";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function WriteSecond({
   setArray,
@@ -13,8 +13,10 @@ function WriteSecond({
   PostItem,
 }) {
   const Navigate = useNavigate();
+  const location = useLocation();
   window.Buffer = window.Buffer || require("buffer").Buffer;
   const arr = []; // 사진이 담기는 임시 공간 다시 부모 컴퍼넌트의 array에 담아준다.
+
   // base64로 인코딩된 데이터 담는곳
   const [detailImgs, setDetailImgs] = useState([]);
 
@@ -73,8 +75,12 @@ function WriteSecond({
   };
 
   const WriteDone = async () => {
-    await PostItem();
-    await Navigate("/");
+    if (detailImgs.length < 5) {
+      alert("사진은 최소 5개를 넣어주세요");
+    } else {
+      await PostItem();
+      await Navigate("/");
+    }
   };
 
   // input감지해 값 저장, 사진 보여주기
@@ -93,7 +99,10 @@ function WriteSecond({
       <RightBicBox>
         <RightTextBox>
           <Image>
-            <div>IMAGE</div>
+            <div style={{ display: "flex" }}>
+              <div>IMAGE</div>
+              <LeastFivePic>사진은 최소 5개를 넣어주세요</LeastFivePic>
+            </div>
             <input
               name="imgFile"
               type="file"
@@ -128,7 +137,8 @@ function WriteSecond({
         <RightTextBox>
           <Location>
             <div>LOCATION</div>
-            <input
+            <textarea
+              maxLength="20"
               ref={location_ref}
               onChange={() => {
                 Submit();
@@ -140,6 +150,8 @@ function WriteSecond({
           <Price>
             <div>PRICE</div>
             <input
+              type="number"
+              maxLength="10"
               ref={price_ref}
               onChange={() => {
                 Submit();
@@ -191,6 +203,13 @@ const LeftText = styled.div`
   height: 28%;
 `;
 
+const LeastFivePic = styled.span`
+  font-size: 14px;
+  font-weight: 400;
+  margin-top: 7px;
+  margin-left: 30px;
+`;
+
 const RightBicBox = styled.div`
   width: 50%;
 `;
@@ -202,14 +221,17 @@ const RightTextBox = styled.div`
 const Image = styled.div`
   margin: 20px 70px;
   font-weight: bold;
-  font-size: 23px;
+  font-size: 13px;
+  div {
+    font-size: 23px;
+  }
   input {
     margin-top: 10px;
   }
 `;
 
 const ShowImges = styled.div`
-  height: 280px;
+  height: 350px;
   overflow-y: auto;
   img {
     margin-bottom: 10px;
@@ -217,37 +239,42 @@ const ShowImges = styled.div`
 `;
 
 const DeleteImg = styled.button`
-  margin-left: 10px;
+  margin-left: 13px;
   margin-bottom: 10px;
+  background-color: white;
+  padding: 3px;
+  border-radius: 5px;
+  font-size: 0.7em;
 `;
 
 const Location = styled.div`
   float: left;
   margin-left: 70px;
-  margin-top: 100px;
+  margin-top: 180px;
   font-weight: bold;
   font-size: 23px;
-  input {
+  textarea {
+    height: 40px;
+    width: 180%;
     margin-top: 10px;
-    height: 50px;
-    width: 230%;
-    border-radius: 5px;
     border: 1px solid black;
+    border-radius: 5px;
+    resize: none;
   }
 `;
 
 const Price = styled.div`
   margin-left: 70px;
-  margin-top: -8px;
+  margin-top: 60px;
   font-weight: bold;
   font-size: 23px;
   input {
-    margin-top: 10px;
-    width: 70%;
-    height: 100px;
-    overflow-y: auto;
+    font-size: 0.8em;
+    width: 67%;
+    height: 30px;
     border-radius: 5px;
     border: 1px solid black;
+    resize: none;
   }
 `;
 
