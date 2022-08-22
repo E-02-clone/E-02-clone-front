@@ -1,20 +1,22 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import $ from "jquery";
 
 function WriteFirst({
   setShowpage,
-  location_ref,
-  price_ref,
+  title_ref,
+  content_ref,
   category_ref,
   RememberFFage,
 }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   // 인풋값 기억, 가격 유효성 검사.
   const Remember = () => {
     RememberFFage(
       category_ref.current.value,
-      location_ref.current.value,
-      price_ref.current.value
+      title_ref.current.value,
+      content_ref.current.value
     );
   };
 
@@ -22,15 +24,16 @@ function WriteFirst({
     <Background>
       <LeftBicBox>
         <LeftText>호스팅할 숙소 유형을 알려주세요.</LeftText>
-        <LeftText>숙소 위치는 어디인가요?</LeftText>
-        <LeftText>이제 요금을 설정하실 차례입니다.</LeftText>
+        <LeftText>숙소 이름을 만들어 주세요.</LeftText>
+        <LeftText>숙소에 대해서 설명해주세요.</LeftText>
       </LeftBicBox>
       <RightBicBox>
         <RightTextBox>
           <Category name="category">
             <div>category</div>
             <select
-              name="job"
+              className="form-select"
+              aria-label="Default select example"
               ref={category_ref}
               onChange={() => {
                 Remember();
@@ -105,31 +108,37 @@ function WriteFirst({
             </CategoryBox> */}
           </Category>
         </RightTextBox>
-        <RightTextBox name="location">
-          <Location>
-            <div>location</div>
-            <input
-              ref={location_ref}
+        <RightTextBox>
+          <Title>
+            <div>TITLE</div>
+            <textarea
+              maxLength="50"
+              ref={title_ref}
               onChange={() => {
                 Remember();
               }}
             />
-          </Location>
+          </Title>
         </RightTextBox>
         <RightTextBox>
-          <Price>
-            <div>price</div>
-            <input
-              ref={price_ref}
+          <Content>
+            <div>CONTENT</div>
+            <textarea
+              maxLength="250"
+              ref={content_ref}
               onChange={() => {
                 Remember();
               }}
-              type="number"
-              step="1000"
             />
-          </Price>
+          </Content>
         </RightTextBox>
-        <ToHomeBtn>홈으로</ToHomeBtn>
+        <ToHomeBtn
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          홈으로
+        </ToHomeBtn>
         <ToNextPage
           onClick={() => {
             setShowpage(false);
@@ -170,7 +179,7 @@ const RightBicBox = styled.div`
 `;
 
 const RightTextBox = styled.div`
-  height: 31%;
+  height: 24%;
 `;
 
 const Category = styled.div`
@@ -179,9 +188,8 @@ const Category = styled.div`
   font-weight: bold;
   font-size: 23px;
   select {
-    width: 40%;
-    height: 30px;
-    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid black;
   }
 `;
 
@@ -204,38 +212,42 @@ const Category = styled.div`
 //   }
 // `;
 
-const Location = styled.div`
+const Title = styled.div`
   padding: 80px 70px;
   font-weight: bold;
   font-size: 23px;
-  input {
+  textarea {
+    padding: 10px;
     margin-top: 10px;
-    height: 50px;
-    width: 70%;
+    width: 75%;
     border-radius: 5px;
     border: 1px solid black;
-    font-size: 21px;
+    font-size: 17px;
+    resize: none;
   }
 `;
 
-const Price = styled.div`
+const Content = styled.div`
   padding: 105px 70px;
   font-weight: bold;
   font-size: 23px;
-  input {
+  textarea {
+    padding: 10px;
     margin-top: 10px;
-    height: 30px;
-    width: 40%;
+    height: 20vh;
+    width: 75%;
     border-radius: 5px;
     border: 1px solid black;
-    font-size: 19px;
+    font-size: 16px;
+    overflow: hidden;
+    resize: none;
   }
 `;
-
 const ToNextPage = styled.div`
   float: right;
   cursor: pointer;
   margin-right: 40px;
+  margin-top: 160px;
   :hover {
     text-decoration: underline;
   }
@@ -245,6 +257,7 @@ const ToHomeBtn = styled.div`
   margin-left: 40px;
   cursor: pointer;
   float: left;
+  margin-top: 160px;
   :hover {
     text-decoration: underline;
   }

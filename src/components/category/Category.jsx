@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Category = ({ setSelect }) => {
+
     return (
         <CategoryBox>
             <CategoryBar>
@@ -72,6 +73,7 @@ const Category = ({ setSelect }) => {
 
 export default Category;
 
+
 const CategoryBox = styled.div`
     width: 100%;
     overflow: hidden;
@@ -91,6 +93,7 @@ const CategoryBar = styled.div`
     background-color: white;
     height: 80px;
     display: flex;
+
     align-items: center;
     justify-content: space-between;
     .category__img {

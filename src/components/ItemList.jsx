@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -35,6 +36,7 @@ const ItemList = ({ select }) => {
                 {items?.map((item) => {
                     return (
                         <Item key={item.itemkey}>
+
                             <Slider {...settings}>
                                 {item.img.map((item) => {
                                     return (
@@ -61,12 +63,14 @@ const ItemList = ({ select }) => {
                                 }
 
                             </LikeBox>
+
                             <div className='item__info'>
                                 <div className='title'>
                                     <div className="item__title">
                                         {item.title}, {item.location}
                                     </div>
                                     <div> ⭐{item.star.map(v => v.star).reduce((a, b) => a + b / item.star.length, 0).toFixed(2)}</div>
+
                                 </div>
                                 <div className='item__price'>
                                     <b>\{item.price}</b>/박
