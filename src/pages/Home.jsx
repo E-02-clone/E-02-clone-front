@@ -12,7 +12,7 @@ const Home = () => {
     console.log(select)
     return (
         <>
-            <Header setSelect={setSelect} />
+            <Header />
             <Category setSelect={setSelect} />
             <Layout>
                 <ItemList select={select} />

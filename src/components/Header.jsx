@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import Modal from './Modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faGlobe, faBars, faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import Category from './category/Category';
 
-const Header = ({ setSelect }) => {
+const Header = () => {
     const [modal, setModal] = useState(false);
     const [openSearchBar, setOpenSearchBar] = useState(false)
 
