@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import WriteFirst from "./WriteDetail/WriteFirst";
-import WriteSecond from "./WriteDetail/WriteSecond";
+import WriteFirst from "../components/WriteDetail/WriteFirst";
+import WriteSecond from "../components/WriteDetail/WriteSecond";
 import { _PostItem } from "../app/slice/ItemSlice";
 
 const Write = () => {
