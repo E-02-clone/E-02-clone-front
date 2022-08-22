@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
+
 import Detail from '../pages/Detail'
 
 function Router() {
@@ -14,3 +15,4 @@ function Router() {
 }
 
 export default Router;
+

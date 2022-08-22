@@ -16,6 +16,7 @@ const Header = () => {
         setModal(false);
     };
 
+
     const [dropbox, setDropbox] = useState(false)
     if (!openSearchBar) {
         return (
@@ -27,6 +28,7 @@ const Header = () => {
                                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/640px-Airbnb_Logo_B%C3%A9lo.svg.png"
                                 alt="logo"
                                 width="100em"
+
                                 onClick={() => {
                                     window.location.replace('/')
                                 }}
@@ -60,6 +62,7 @@ const Header = () => {
                                 <button><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                             </SearchBar>
                         </Search>
+
                     </MoreSearchBar>
                 </Head>
                 <Background mode="normal" />
@@ -90,6 +93,7 @@ const Header = () => {
                             </LoginButton>
                         </HeaderRight>
 
+
                     </HeaderBar>
                     <MoreSearchBar mode="search">
                         <Search mode="search">
@@ -116,6 +120,7 @@ const Header = () => {
 };
 
 export default Header;
+
 
 const Dropbox = styled.div`
     position: absolute;
@@ -182,21 +187,26 @@ const Head = styled.div`
     left: 0;
     z-index: 5;
     padding: 0 160px;
+
 `
 const HeaderRight = styled.div`
     display: flex; 
     align-items: center;
     justify-content: center;
+
     z-index: 10;
 `
 const Logo = styled.img`
     object-fit: contain;
     cursor: pointer;
+
 `
 
 const LogoButton = styled.div`
     width: 30em;
+
     z-index: 10;
+
 `
 
 const HeaderButton = styled.button`
@@ -213,7 +223,9 @@ const HeaderButton = styled.button`
 `
 const Search = styled.div`
     width: 37em;
+
     z-index: 5;
+
 
 `
 
@@ -222,7 +234,9 @@ const LoginButton = styled.button`
     display:flex;
     align-items: center;
     justify-content:center;
+
     position:relative;
+
     width: 84px;
     height: 42px;
     border-radius: 42px;
@@ -247,15 +261,19 @@ const HeaderBar = styled.div`
     display: flex;
     align-items:center;
     justify-content: space-between;
+
     background-color: white;
     z-index: 5;
     transition: 0.2s ease-in;
+
     img{
         height: 36px;
     }
 `
 
+
 const SearchBar = styled.div`
+
     width: 400px;
     height: 48px;
     border-radius: 48px;

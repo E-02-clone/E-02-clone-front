@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -174,6 +175,7 @@ const Modal = ({ closeModal }) => {
 };
 
 export default Modal;
+
 
 const OpenModal = styled.div`
 

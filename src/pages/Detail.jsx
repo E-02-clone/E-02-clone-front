@@ -1,103 +1,99 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-// import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+<<<<<<< HEAD
 import CommentsLayout from "../components/commentsLayout"
+=======
+import { _GetItems } from "../app/slice/ItemSlice";
+import DetailTitle from "../components/DetailDetail/DetailTitle";
+import DetailPicture from "../components/DetailDetail/DetailPicture";
+import DetailDescLift from "../components/DetailDetail/DetailDescLeft";
+import DetailDescRight from "../components/DetailDetail/DetailDescRight";
+import MorePictures from "../components/DetailDetail/MorePictures";
+>>>>>>> 84c3496a09645b090db7e23298f6d084f82edaf0
 
 function Detail() {
-  // const dispatch = useDispatch()
-  // const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.ItemSlice.Items);
+  const params = useParams();
+  const [ModalShow, setModalShow] = useState("none");
+  console.log(state);
 
-  // useEffect(() => {
-  //   dispatch(_GetItems())
-  // }, [])
+  useEffect(() => {
+    dispatch(_GetItems(params.id));
+  }, []);
+
+  const showModal = () => {
+    setModalShow("");
+  };
 
   return (
     <>
-      <Head>대충 헤드</Head>
       <TopMainBox>
-        <TitleTop>
-          해당 게시글의 이름해당 게시글의 이름해당 게시글의 이름해당 게시글의
-          이름
-        </TitleTop>
-        <TitleBottom>
-          <div>별점, 후기 개수, 위치</div>
-          <div>공유하기, 저장버튼</div>
-        </TitleBottom>
-        <AllPictures>
-          <PictureBicBox>사진들</PictureBicBox>
-          <PictureSmallBox>사진들</PictureSmallBox>
-        </AllPictures>
+        <DetailTitle
+          title={state?.title}
+          star={state?.star}
+          location={state?.location}
+        />
+        {state?.img?.length ? (
+          <DetailPicture
+            img1={state?.img[0]}
+            img2={state?.img[1]}
+            img3={state?.img[2]}
+            img4={state?.img[3]}
+            img5={state?.img[4]}
+            showModal={showModal}
+          />
+        ) : null}
       </TopMainBox>
       <MiddleMainBox>
-        <MiddleLeftBox>왼쪽</MiddleLeftBox>
-        <MiddleRightBox>얘는 이 공간 안에서 움직이게 처리해야함</MiddleRightBox>
+        <DetailDescLift
+          auth={state?.auth}
+          category={state?.category}
+          content={state?.content}
+          img2={state?.img?.length ? state?.img[1] : null}
+        />
+        <DetailDescRight price={state?.price} star={state?.star} />
       </MiddleMainBox>
+<<<<<<< HEAD
       <CommentsLayout/>
+=======
+      <CommetLine />
+      <MorePictures
+        ModalShow={ModalShow}
+        setModalShow={setModalShow}
+        img={state.img}
+      />
+      <Comment>댓글창</Comment>
+>>>>>>> 84c3496a09645b090db7e23298f6d084f82edaf0
     </>
   );
 }
 
-const Head = styled.div`
-  background-color: blue;
-  height: 80px;
-`;
-
 const TopMainBox = styled.div`
-  width: 70%;
+  width: 73%;
+  min-width: 600px;
   margin: 0px auto 0px auto;
-`;
-
-const TitleTop = styled.div`
-  background-color: #006d00;
-  height: 50px;
-  margin-top: 20px;
-`;
-
-const TitleBottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-  height: 30px;
-  margin-top: 10px;
-
-  background-color: yellow;
-`;
-
-const AllPictures = styled.div`
-  display: flex;
-  margin-top: 20px;
-`;
-
-const PictureBicBox = styled.div`
-  width: 48%;
-  margin-right: 2%;
-  height: 300px;
-  background-color: #e09f27;
-`;
-
-const PictureSmallBox = styled.div`
-  width: 48%;
-  margin-left: 2%;
-  height: 300px;
-  background-color: #8d7e62;
 `;
 
 const MiddleMainBox = styled.div`
   display: flex;
-  width: 70%;
+  width: 73%;
+  min-width: 600px;
   margin: 20px auto 0px auto;
 `;
 
-const MiddleLeftBox = styled.div`
-  width: 63%;
-  background-color: gray;
-  height: 1000px;
+const Comment = styled.div`
+  background-color: #99d1aa;
+  width: 100%;
+  height: 500px;
 `;
 
-const MiddleRightBox = styled.div`
-  width: 35%;
-  margin-left: 2%;
-  background-color: #c29c9c;
-  height: 1000px;
+const CommetLine = styled.hr`
+  margin-top: 70px;
+  width: 73%;
+  margin-left: auto;
+  margin-right: auto;
 `;
 export default Detail;
