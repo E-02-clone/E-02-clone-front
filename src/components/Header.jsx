@@ -17,7 +17,6 @@ const Header = ({ setSelect }) => {
         setModal(false);
     };
 
-    console.log(modal);
     if (!openSearchBar) {
         return (
             <>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 // import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import CommentsLayout from "../components/commentsLayout"
 
 function Detail() {
   // const dispatch = useDispatch()
@@ -32,6 +33,7 @@ function Detail() {
         <MiddleLeftBox>왼쪽</MiddleLeftBox>
         <MiddleRightBox>얘는 이 공간 안에서 움직이게 처리해야함</MiddleRightBox>
       </MiddleMainBox>
+      <CommentsLayout/>
     </>
   );
 }

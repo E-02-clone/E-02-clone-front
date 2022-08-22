@@ -18,7 +18,6 @@ const Modal = ({ closeModal }) => {
 
 
 
-
     if (mode === "login") {
         return (
             <OpenModal>

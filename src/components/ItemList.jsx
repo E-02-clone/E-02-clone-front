@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 const ItemList = ({ select }) => {
     const items = useSelector(state => state.main.data?.data)
     const dispatch = useDispatch()
-    console.log(items)
     useEffect(() => {
         dispatch(getMainItems())
     }, [dispatch])
