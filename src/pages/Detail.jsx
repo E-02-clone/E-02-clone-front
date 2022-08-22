@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-<<<<<<< HEAD
 import CommentsLayout from "../components/commentsLayout"
-=======
 import { _GetItems } from "../app/slice/ItemSlice";
 import DetailTitle from "../components/DetailDetail/DetailTitle";
 import DetailPicture from "../components/DetailDetail/DetailPicture";
 import DetailDescLift from "../components/DetailDetail/DetailDescLeft";
 import DetailDescRight from "../components/DetailDetail/DetailDescRight";
 import MorePictures from "../components/DetailDetail/MorePictures";
->>>>>>> 84c3496a09645b090db7e23298f6d084f82edaf0
 
 function Detail() {
   const dispatch = useDispatch();
@@ -56,17 +53,14 @@ function Detail() {
         />
         <DetailDescRight price={state?.price} star={state?.star} />
       </MiddleMainBox>
-<<<<<<< HEAD
-      <CommentsLayout/>
-=======
+
       <CommetLine />
       <MorePictures
         ModalShow={ModalShow}
         setModalShow={setModalShow}
-        img={state.img}
+        img={state?.img}
       />
       <Comment>댓글창</Comment>
->>>>>>> 84c3496a09645b090db7e23298f6d084f82edaf0
     </>
   );
 }

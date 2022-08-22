@@ -36,18 +36,19 @@ const ItemList = ({ select }) => {
         return (
             <ItemListLayout>
                 {items?.map((item) => {
+                    console.log(item)
                     return (
                         <Item key={item.itemkey}>
 
-                            <Slider {...settings}>
-                                {item.img.map((item) => {
-                                    return (
-                                        <Link to={`/detail/${item.itemkey}`}>
+                            <Link to={`/detail/${item.itemkey}`}>
+                                <Slider {...settings}>
+                                    {item.img.map((item) => {
+                                        return (
                                             <img src={item} alt="" />
-                                        </Link>
-                                    )
-                                })}
-                            </Slider>
+                                        )
+                                    })}
+                                </Slider>
+                            </Link>
                             <LikeBox onClick={() => {
                                 dispatch(setLike(item.itemkey))
                             }}>
