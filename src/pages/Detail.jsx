@@ -45,6 +45,7 @@ function Detail() {
         />
         <DetailDescRight price={state?.price} star={state?.star} />
       </MiddleMainBox>
+      <hr style={{ marginTop: "60px" }} />
       <Comment>댓글창</Comment>
     </>
   );
@@ -64,7 +65,7 @@ const MiddleMainBox = styled.div`
 `;
 
 const Comment = styled.div`
-  background-color: #6bbf84;
+  background-color: #99d1aa;
   width: 100%;
   height: 500px;
 `;

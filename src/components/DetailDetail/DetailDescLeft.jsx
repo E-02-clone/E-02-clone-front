@@ -124,7 +124,6 @@ const SmallPictrueFour = styled.img`
 
 const MiddleLeftBox = styled.div`
   width: 63%;
-  /* background-color: #e4dada; */
   height: 100%;
 `;
 

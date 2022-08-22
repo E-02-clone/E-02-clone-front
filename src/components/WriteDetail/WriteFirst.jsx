@@ -110,7 +110,7 @@ function WriteFirst({
         <RightTextBox>
           <Title>
             <div>TITLE</div>
-            <input
+            <textarea
               ref={title_ref}
               onChange={() => {
                 Remember();
@@ -121,7 +121,7 @@ function WriteFirst({
         <RightTextBox>
           <Content>
             <div>CONTENT</div>
-            <input
+            <textarea
               ref={content_ref}
               onChange={() => {
                 Remember();
@@ -213,14 +213,14 @@ const Title = styled.div`
   padding: 80px 70px;
   font-weight: bold;
   font-size: 23px;
-  input {
+  textarea {
     padding: 10px;
     margin-top: 10px;
-    height: 35px;
     width: 75%;
     border-radius: 5px;
     border: 1px solid black;
-    font-size: 21px;
+    font-size: 17px;
+    resize: none;
   }
 `;
 
@@ -228,17 +228,18 @@ const Content = styled.div`
   padding: 105px 70px;
   font-weight: bold;
   font-size: 23px;
-  input {
+  textarea {
     padding: 10px;
     margin-top: 10px;
-    height: 150px;
+    height: 20vh;
     width: 75%;
     border-radius: 5px;
     border: 1px solid black;
-    font-size: 19px;
+    font-size: 16px;
+    overflow: hidden;
+    resize: none;
   }
 `;
-
 const ToNextPage = styled.div`
   float: right;
   cursor: pointer;

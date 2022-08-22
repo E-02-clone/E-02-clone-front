@@ -57,14 +57,17 @@ function DetailDescRight({ price, star }) {
             <div>총합계</div>
             <div>₩{price * 3 + plusPrice}</div>
           </FinalInfo2>
+          <ReportBtn
+            onClick={() => {
+              alert("아직 미구현 입니다.");
+            }}
+          >
+            <span>
+              <img src="/images/report.png" />
+            </span>
+            숙소 신고하기
+          </ReportBtn>
         </StickyTopBox>
-        <ReportBtn
-          onClick={() => {
-            alert("아직 미구현 입니다.");
-          }}
-        >
-          숙소 신고하기
-        </ReportBtn>
       </MiddleRightBox>
     </>
   );
@@ -72,13 +75,14 @@ function DetailDescRight({ price, star }) {
 
 const MiddleRightBox = styled.div`
   width: 35%;
+  min-width: 300px;
   margin-left: 2%;
   height: 1500px;
 `;
 
 const StickyTopBox = styled.div`
   position: sticky;
-  height: 440px;
+  height: 460px;
   top: 30px;
   padding: 24px;
 
@@ -144,8 +148,10 @@ const BookBtn = styled.div`
 `;
 
 const NotionText = styled.div`
-  margin: 10px auto;
-  width: 85%;
+  margin: 18px auto;
+  width: 80%;
+  font-size: 0.9em;
+  font-weight: 300;
 `;
 
 const FinalInfo = styled.div`
@@ -164,10 +170,13 @@ const FinalInfo2 = styled.div`
 `;
 
 const ReportBtn = styled.div`
-  width: 25%;
-  margin: 10px auto;
+  width: 40%;
+  margin: 20px auto;
   font-weight: 300;
   cursor: pointer;
+  padding-top: 23px;
+  text-decoration: underline;
+  text-decoration-color: #b4b4b4;
 `;
 
 export default DetailDescRight;
