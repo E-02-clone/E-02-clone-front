@@ -1,6 +1,6 @@
 
 import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { postLogin, postJoin } from '../app/slice/userSlice';
 import { isId, isPassword, isNickname, isEmail } from '../utils/regExpLogin';
