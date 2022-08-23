@@ -8,7 +8,7 @@ import { logoutUser } from '../app/slice/userSlice';
 
 const Header = ({ modal, setModal }) => {
     const dispatch = useDispatch()
-    const [openSearchBar, setOpenSearchBar] = useState(false)
+    const [openSearchBar, setOpenSearchBar] = useState("normal")
     const onLogoutHandler = () => {
         const confirm = window.confirm("로그아웃 하시겠습니까?");
         if (confirm) {
@@ -26,110 +26,62 @@ const Header = ({ modal, setModal }) => {
 
 
     const [dropbox, setDropbox] = useState(false)
-    if (!openSearchBar) {
-        return (
-            <>
-                <Head mode="normal">
-                    <HeaderBar mode="normal">
-                        <LogoButton>
-                            <Logo
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/640px-Airbnb_Logo_B%C3%A9lo.svg.png"
-                                alt="logo"
-                                width="100em"
+    return (
+        <>
+            <Head mode={openSearchBar}>
+                <HeaderBar mode={openSearchBar}>
+                    <LogoButton>
+                        <Logo
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/640px-Airbnb_Logo_B%C3%A9lo.svg.png"
+                            alt="logo"
+                            width="100em"
+                            onClick={() => {
+                                window.location.replace('/')
+                            }}
+                        />
+                    </LogoButton>
+                    <HeaderRight className='header__right'>
+                        <HeaderButton>호스트 되기</HeaderButton>
+                        <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
+                        <LoginButton onClick={() => {
+                            setDropbox(!dropbox)
+                        }}>
+                            <span className="bars"><FontAwesomeIcon icon={faBars} /></span>
+                            <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
+                            <Dropbox open={dropbox}>
+                                {localStorage.getItem("jwtToken") === null
+                                    ?
+                                    <div onClick={openModal}>로그인</div>
+                                    :
+                                    <div onClick={onLogoutHandler}>로그아웃</div>
+                                }
+                            </Dropbox>
+                        </LoginButton>
+                    </HeaderRight>
+                </HeaderBar>
+                <MoreSearchBar mode={openSearchBar}>
+                    <Search >
+                        <SearchBar mode={openSearchBar} onClick={() => {
+                            openSearchBar === "normal" ?
+                                setOpenSearchBar("search")
+                                :
+                                setOpenSearchBar("normal")
+                        }}>
+                            <div>
+                                <span className="search where">어디든지</span>
+                                <span className="search when">언제든 일주일</span>
+                                <span>게스트 추가</span>
+                            </div>
+                            <button><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                        </SearchBar>
+                    </Search>
 
-                                onClick={() => {
-                                    window.location.replace('/')
-                                }}
-                            />
-                        </LogoButton>
-                        <HeaderRight className='header__right'>
-                            <HeaderButton>호스트 되기</HeaderButton>
-                            <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
-                            <LoginButton onClick={() => {
-                                setDropbox(!dropbox)
-                            }}>
-                                <span className="bars"><FontAwesomeIcon icon={faBars} /></span>
-                                <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
-                                <Dropbox open={dropbox}>
-                                    {localStorage.getItem("jwtToken") === null ?
-                                        <div onClick={openModal}>로그인</div>
-                                        :
-                                        <div onClick={onLogoutHandler}>로그아웃</div>
-                                    }
-                                </Dropbox>
-                            </LoginButton>
-                            {/* {localStorage.getItem("jwtToken") === null */}
-
-                        </HeaderRight>
-                    </HeaderBar>
-                    <MoreSearchBar mode="normal">
-                        <Search >
-                            <SearchBar mode="normal" onClick={() => {
-                                setOpenSearchBar(true)
-                            }}>
-                                <div>
-                                    <span className="search where">어디든지</span>
-                                    <span className="search when">언제든 일주일</span>
-                                    <span>게스트 추가</span>
-                                </div>
-                                <button><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-                            </SearchBar>
-                        </Search>
-
-                    </MoreSearchBar>
-                </Head>
-                <Background mode="normal" />
-                {modal ? <Modal closeModal={closeModal} /> : null}
-            </>
-        );
-    } else {
-        return (
-            <>
-                <Head mode="search">
-                    <HeaderBar mode="search">
-                        <LogoButton>
-                            <Logo
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/640px-Airbnb_Logo_B%C3%A9lo.svg.png"
-                                alt="logo"
-                                width="100em"
-                                onClick={() => {
-                                    window.location.replace('/')
-                                }}
-                            />
-                        </LogoButton>
-                        <HeaderRight className='header__right'>
-                            <HeaderButton>호스트 되기</HeaderButton>
-                            <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
-                            <LoginButton onClick={openModal}>
-                                <span className="bars"><FontAwesomeIcon icon={faBars} /></span>
-                                <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
-                            </LoginButton>
-                        </HeaderRight>
-
-
-                    </HeaderBar>
-                    <MoreSearchBar mode="search">
-                        <Search mode="search">
-                            <SearchBar mode="search" onClick={() => {
-                                setOpenSearchBar(false)
-                            }}>
-                                <div>
-                                    <span className="search where">어디든지</span>
-                                    <span className="search when">언제든 일주일</span>
-                                    <span>게스트 추가</span>
-                                </div>
-                                <button onClick={() => {
-                                    // setOpenSearchBar(false);
-                                }}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-                            </SearchBar>
-                        </Search>
-                    </MoreSearchBar>
-                </Head>
-                <Background mode="search" />
-                {modal ? <Modal closeModal={closeModal} /> : null}
-            </>
-        );
-    }
+                </MoreSearchBar>
+            </Head>
+            <Background mode={openSearchBar} />
+            {modal ? <Modal closeModal={closeModal} /> : null}
+        </>
+    );
 };
 
 export default Header;
@@ -147,8 +99,6 @@ const Dropbox = styled.div`
     font-weight: bold;
     font-size: 18px;
     width: 230px;
-    /* height: 50px; */
-    /* opacity: 0.3; */
     background-color:white;
     z-index: 11;
     top:50px;
