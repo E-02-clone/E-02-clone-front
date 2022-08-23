@@ -6,13 +6,15 @@ const Price = () => {
     const [price, setPrice] = useState(null);
 
     return (
-        <div style={{ width: "50%", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <PriceLayout>
+            <div className="prcie__input">
                 <PriceButton state={price <= 13426} onClick={() => {
                     price - 1000 < 13426 ? setPrice(13426) : setPrice(price - 1000)
-                }}><div>-</div></PriceButton>
+                }}>
+                    <div>-</div>
+                </PriceButton>
                 <div style={{ margin: "0 32px" }}>
-                    <PriceInput placeholder="\00" value={price} onChange={(e) => {
+                    <PriceInput placeholder="\00" value={price} state={price < 13426} onChange={(e) => {
                         setPrice(e.target.value)
                     }} />
                 </div>
@@ -30,11 +32,24 @@ const Price = () => {
                 </div>
                 <SalePriceCheckBox type="checkbox" />
             </SaleButtonLabel>
-        </div>
+        </PriceLayout>
     );
 };
 
 export default Price;
+
+const PriceLayout = styled.div`
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .prcie__input {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+`
 
 const SaleButtonLabel = styled.label`
     width: 500px;
@@ -78,10 +93,16 @@ const PriceInput = styled.input`
     height: 96px;
     width: 300px;
     margin: 8px 12px;
-    border: 2px solid lightgray;
+    border: ${(prop) => prop.state ? "2px solid red" : "2px solid lightgray"};
+    background-color: ${(prop) => prop.state ? "#f4c9c9" : "white"};
     border-radius: 5px;
     font-size: 64px;
     font-weight: bold;
+    &:focus {
+        outline: red;
+        border: ${(prop) => prop.state ? "4px solid red" : "4px solid black"};
+        background-color: white;
+    }
 `
 
 const SalePriceCheckBox = styled.input`
