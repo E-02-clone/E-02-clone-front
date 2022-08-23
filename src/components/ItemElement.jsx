@@ -97,7 +97,7 @@ const LikeLine = styled.div`
     background-color: transparent;
     color: white;
     font-size: 24px;
-    z-index: 3;
+    z-index: 2;
 `
 const LikeBox = styled.div`
     cursor: pointer;
