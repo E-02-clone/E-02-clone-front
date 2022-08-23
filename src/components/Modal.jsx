@@ -6,10 +6,8 @@ import { postLogin, postJoin } from '../app/slice/userSlice';
 import { isId, isPassword, isNickname, isEmail } from '../utils/regExpLogin';
 const Modal = ({ closeModal }) => {
 
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.user)
     const [mode, setMode] = useState('login')
-    console.log(user)
+
     const userId = useRef();
     const password = useRef();
     const comfirm = useRef();
@@ -24,7 +22,9 @@ const Modal = ({ closeModal }) => {
     const [checkEmail, setCheckEmail] = useState(null);
     const [checkHost, setCheckHost] = useState(true);
 
+    const dispatch = useDispatch();
 
+    /** 회원가입 함수 */
     const submitJoin = (e) => {
         e.preventDefault();
         if (checkId !== true) {
@@ -53,8 +53,6 @@ const Modal = ({ closeModal }) => {
             setMode('login')
         }
     }
-
-    console.log(host.current?.value);
 
     if (mode === "login") {
         return (
