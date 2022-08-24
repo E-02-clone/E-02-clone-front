@@ -44,8 +44,7 @@ const Header = ({ modal, setModal, type }) => {
                         />
                     </LogoButton>
                     <HeaderRight className='header__right'>
-                        { }
-                        <HeaderButton>호스트 되기</HeaderButton>
+                        <Link to={"/write/1"}><HeaderButton>호스트 되기</HeaderButton></Link>
                         <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
                         <LoginButton onClick={() => {
                             setDropbox(!dropbox)

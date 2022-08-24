@@ -4,7 +4,7 @@ import Detail from '../pages/Detail'
 import Test from '../pages/Test';
 import WishLists from '../pages/WishLists';
 import Wish from '../pages/Wish';
-
+import WriteTwo from '../pages/WriteTwo'
 
 function Router() {
     return (
@@ -15,6 +15,7 @@ function Router() {
                 <Route path="/test" element={<Test />} />
                 <Route path="/wishlists" element={<WishLists />} />
                 <Route path="/wishlists/:id" element={<Wish />} />
+                <Route path="/write/:id" element={<WriteTwo />} />
             </Routes>
         </BrowserRouter>
     );
