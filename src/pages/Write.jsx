@@ -31,8 +31,11 @@ const Write = () => {
     setContent(k);
   }
 
+<<<<<<< HEAD
+=======
   // dddd
 
+>>>>>>> 56cb3592e0162f649d5d0d1e6b012199ba1dedf8
   // console.log(reallocation?.state?.id);
 
   const RememberSFage = (i, j) => {

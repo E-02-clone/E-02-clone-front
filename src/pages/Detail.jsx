@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+
 import CommentsLayout from "../components/Comments/commentsLayout";
 import { _GetItems } from "../app/slice/ItemSlice";
 import DetailTitle from "../components/DetailDetail/DetailTitle";
@@ -9,6 +10,7 @@ import DetailPicture from "../components/DetailDetail/DetailPicture";
 import DetailDescLift from "../components/DetailDetail/DetailDescLeft";
 import DetailDescRight from "../components/DetailDetail/DetailDescRight";
 import MorePictures from "../components/DetailDetail/MorePictures";
+
 import Header from "../components/Header";
 
 function Detail() {
@@ -16,6 +18,7 @@ function Detail() {
   const state = useSelector((state) => state.ItemSlice.Items);
   const params = useParams();
   const [ModalShow, setModalShow] = useState("none");
+
 
   useEffect(() => {
     dispatch(_GetItems(params.id));
@@ -61,6 +64,7 @@ function Detail() {
         setModalShow={setModalShow}
         img={state?.img}
       />
+
       <CommentsLayout />
     </>
   );
