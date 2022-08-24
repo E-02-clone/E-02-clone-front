@@ -45,7 +45,6 @@ const ItemList = ({ select, modal, setModal }) => {
     return (
       <ItemListLayout>
         {items?.map((item) => {
-          console.log(item);
           return (
             <Item key={item.itemkey}>
               <Link to={`/detail/${item.itemkey}`}>

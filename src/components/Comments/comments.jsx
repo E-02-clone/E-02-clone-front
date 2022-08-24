@@ -1,12 +1,14 @@
 import React,{useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getCommentsThunk } from "../app/slice/writeSlice";
+import { getCommentsThunk } from "../../app/slice/writeSlice";
 import { useParams } from "react-router-dom";
 
-import './css/comments.css'
+import '../css/comments.css'
 
 const Comments = () => {
-    
+
+ 
+
     const dispatch = useDispatch();
     const params = useParams();
 
@@ -14,11 +16,14 @@ const Comments = () => {
     state.writeSlice
 );
 
+    
+
 useEffect(()=>{
     dispatch(getCommentsThunk(params.id))
-},[dispatch])
+},[])
 
-   
+
+
 
 //console.log(comments[0].map((a,b)=>a.commentkey))
 
@@ -38,8 +43,8 @@ useEffect(()=>{
             return(
             <section key={a.commentkey} className="comments">
             <h5>작성자:{a.userkey}</h5>
-            <h5>평점:{a.star}점</h5>
-            <h6>날짜:{a.updatedAt}</h6>
+            <h5>&#9733;{a.star}</h5>
+            <h6 className="writeTime">{a.updatedAt}</h6>
             <h5 className="commentBox">{a.comment}</h5>
             
             </section>

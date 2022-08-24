@@ -14,7 +14,6 @@ const initialState = {
 export const postCommentsThunk = createAsyncThunk(
   "commnets/post",
   async (payload, thunkAPI) => {
-    console.log(payload)
     try {
       const result = await axios.post(process.env.REACT_APP_URL+`/comment/${payload.id}` , payload)
         return thunkAPI.fulfillWithValue(result.data); 
@@ -42,6 +41,7 @@ export const getCommentsThunk = createAsyncThunk(
 export const deleteCommentsThunk = createAsyncThunk(
   "comments/delete",
   async(payload, thunkAPI) => {
+    console.log(payload)
     try{
     
       const response = await axios.delete(process.env.REACT_APP_URL + `/comment/${payload}`);
@@ -55,9 +55,8 @@ export const deleteCommentsThunk = createAsyncThunk(
 export const putCommentsThunk = createAsyncThunk(
   "comments/put",
   async(payload, thunkAPI) => {
-    console.log(payload)
     try{
-      const response = await axios.put(process.env.REACT_APP_URL + `/comment/${payload}`);
+      const response = await axios.put(process.env.REACT_APP_URL + `/comment/${payload.commentkey}`, {star: payload.star, comment: payload.comment});
       return thunkAPI.fulfillWithValue(payload);
     }catch (error){
       console.log(error)
@@ -72,7 +71,7 @@ export const WriteSlice = createSlice({
   reducers: {},
   extraReducers: {
     [postCommentsThunk.fulfilled]: (state, action) => {
-      console.log(current(state))
+      state.data.push(action.payload.data)
     },
     [postCommentsThunk.rejected]: (state, action) => {
     },
@@ -84,20 +83,27 @@ export const WriteSlice = createSlice({
     },
 
     [deleteCommentsThunk.fulfilled]: (state, action) => {
-      console.log(current(state))
-      console.log(action.payload)
       state.data = current(state).data.filter((a) => a.commentkey !== action.payload)
     },
     [deleteCommentsThunk.rejected]: (state, action) => {
       console.log(action);
     },
     [putCommentsThunk.fulfilled]: (state, action) => {
-      console.log(current(state))
-      console.log(action)
+      console.log(action.payload);
+      //comment , star, commentkey
+      
+      state.data = current(state).data.map((el)=>el.commentkey===action.payload.commentkey ? 
+      {...action.payload, comment:action.payload.comment, star:action.payload.star} : el)
+
+      console.log(current(state).data)
+      // state.data = {...current(state).data.filter((el)=>el.commentkey===action.payload.commentkey)[0], 
+      //   comment:action.payload.comment, star:action.payload.star}
+      // 같은거 찾아냄
+      // search = ({...action.payload, comment:action.payload.comment, star:action.payload.star})
+      
     },
     [putCommentsThunk.rejected]: (state, action) => {
-      console.log(current(state))
-      console.log(action);
+      
     }
   },
 });
