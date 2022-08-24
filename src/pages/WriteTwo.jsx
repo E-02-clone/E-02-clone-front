@@ -72,7 +72,7 @@ function WriteTwo() {
         ])
       );
       await alert("수정이 완료되었습니다.");
-      navigate("/");
+      await navigate("/");
     } else {
       console.log("생성시작");
       await dispatch(
@@ -93,7 +93,7 @@ function WriteTwo() {
         ])
       );
       await alert("작성이 완료되었습니다.");
-      navigate("/");
+      await navigate("/");
     }
   };
 
