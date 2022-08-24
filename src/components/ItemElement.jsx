@@ -65,7 +65,7 @@ const ItemElement = ({ item, setModal }) => {
             <div className='item__info'>
                 <div className='title'>
                     <div className="item__title">
-                        {item.title}, {item.location}
+                        <span className='title__reduce'>{item.title}</span>, {item.location}
                     </div>
                     <div> ⭐{item.star.map(v => v.star).reduce((a, b) => a + b / item.star.length, 0).toFixed(2)}</div>
                 </div>
@@ -131,4 +131,11 @@ const Item = styled.div`
         flex-direction: column;
         justify-content: space-between;
     }
+    /* .title__reduce {
+        text-align: left;
+        word-wrap: break-word;
+        display: -webkit-box;
+        -webkit-line-clamp: 2 ;
+        -webkit-box-orient: vertical;
+    } */
 `

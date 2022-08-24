@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { getMainItems } from '../app/slice/mainSlice';
 import ItemElement from './ItemElement';
 
-const ItemList = ({ select, setModal }) => {
+const ItemList = ({ select, setModal, modal }) => {
     const items = useSelector(state => state.main.data?.data)
-
+    console.log(items)
     const dispatch = useDispatch()
 
     useEffect(() => {

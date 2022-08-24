@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import Modal from './Modal';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faGlobe, faBars, faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { logoutUser } from '../app/slice/userSlice';
+import { Link } from 'react-router-dom';
+import { getSearchItems } from '../app/slice/mainSlice';
 
-const Header = ({ modal, setModal }) => {
+const Header = ({ modal, setModal, type }) => {
+    const searchItem = useRef()
     const dispatch = useDispatch()
     const [openSearchBar, setOpenSearchBar] = useState("normal")
     const onLogoutHandler = () => {
@@ -41,6 +44,7 @@ const Header = ({ modal, setModal }) => {
                         />
                     </LogoButton>
                     <HeaderRight className='header__right'>
+                        { }
                         <HeaderButton>호스트 되기</HeaderButton>
                         <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
                         <LoginButton onClick={() => {
@@ -49,6 +53,9 @@ const Header = ({ modal, setModal }) => {
                             <span className="bars"><FontAwesomeIcon icon={faBars} /></span>
                             <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
                             <Dropbox open={dropbox}>
+                                <StyledLink to="/wishlists">
+                                    <div class="wishlist">위시리스트</div>
+                                </StyledLink>
                                 {localStorage.getItem("jwtToken") === null
                                     ?
                                     <div onClick={openModal}>로그인</div>
@@ -60,21 +67,34 @@ const Header = ({ modal, setModal }) => {
                     </HeaderRight>
                 </HeaderBar>
                 <MoreSearchBar mode={openSearchBar}>
-                    <Search >
-                        <SearchBar mode={openSearchBar} onClick={() => {
-                            openSearchBar === "normal" ?
-                                setOpenSearchBar("search")
-                                :
-                                setOpenSearchBar("normal")
-                        }}>
-                            <div>
-                                <span className="search where">어디든지</span>
-                                <span className="search when">언제든 일주일</span>
-                                <span>게스트 추가</span>
-                            </div>
-                            <button><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-                        </SearchBar>
-                    </Search>
+                    {type !== "wish" &&
+                        <Search >
+                            <SearchBar mode={openSearchBar} onClick={() => {
+                                openSearchBar === "normal" &&
+                                    setOpenSearchBar("search")
+                            }}>
+                                {
+                                    openSearchBar === "normal" ?
+                                        <div>
+                                            <span className="search where">어디든지</span>
+                                            <span className="search when">언제든 일주일</span>
+                                            <span>게스트 추가</span>
+                                        </div>
+                                        :
+                                        <div>
+                                            <SearchInput type="text" ref={searchItem} />
+                                        </div>
+                                }
+
+                                <button onClick={(e) => {
+                                    e.preventDefault();
+                                    dispatch(getSearchItems(searchItem.current.value))
+                                    setOpenSearchBar("normal")
+
+                                }}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                            </SearchBar>
+                        </Search>}
+
 
                 </MoreSearchBar>
             </Head>
@@ -85,6 +105,24 @@ const Header = ({ modal, setModal }) => {
 };
 
 export default Header;
+
+const SearchInput = styled.input`
+    width:320px;
+    margin:0 10px 0 20px;
+    border: none;
+    &:focus {
+        outline:none;
+    }
+`
+
+const StyledLink = styled(Link)`
+    text-decoration:none;
+    color: black;
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+        color: black;
+    }
+`
 
 
 const Dropbox = styled.div`
@@ -97,7 +135,7 @@ const Dropbox = styled.div`
     justify-content:center;
     margin: auto auto;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     width: 230px;
     background-color:white;
     z-index: 11;
@@ -107,11 +145,12 @@ const Dropbox = styled.div`
     display: ${(prop) => prop.open ? "block" : "none"};
     div {
         width: 100%;
-        padding: 5px 0 ;
+        padding: 10px 0 ;
     }
     div:hover {
         background-color: #f7f7f7;
     }
+
 `
 
 const Background = styled.div`
