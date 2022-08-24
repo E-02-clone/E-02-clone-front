@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 function DetailDescRight({ price, star }) {
+  const state = useSelector((state) => state?.writeSlice?.data);
   const plusPrice = 0;
 
   return (
@@ -17,7 +19,7 @@ function DetailDescRight({ price, star }) {
             </div>
             <div style={{ marginTop: "5px" }}>
               <span>★ {star} </span>
-              <span>・ 후기 54개</span>
+              <span>・ 후기 {state.length}개</span>
             </div>
           </StickyTitle>
           <div style={{ display: "flex", marginTop: "13px", flexWrap: "wrap" }}>
