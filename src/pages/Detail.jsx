@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-
-import CommentsLayout from "../components/Comments/commentsLayout";
+import CommentsLayout from "../components/commentsLayout";
 import { _GetItems } from "../app/slice/ItemSlice";
 import DetailTitle from "../components/DetailDetail/DetailTitle";
 import DetailPicture from "../components/DetailDetail/DetailPicture";
 import DetailDescLift from "../components/DetailDetail/DetailDescLeft";
 import DetailDescRight from "../components/DetailDetail/DetailDescRight";
 import MorePictures from "../components/DetailDetail/MorePictures";
-
 import Header from "../components/Header";
 
 function Detail() {
@@ -18,7 +16,6 @@ function Detail() {
   const state = useSelector((state) => state.ItemSlice.Items);
   const params = useParams();
   const [ModalShow, setModalShow] = useState("none");
-
 
   useEffect(() => {
     dispatch(_GetItems(params.id));
@@ -29,13 +26,15 @@ function Detail() {
   };
 
   return (
-    <>
+    <AllBox>
       <Header />
       <TopMainBox>
         <DetailTitle
           title={state?.title}
           star={state?.star}
           location={state?.location}
+          nickname={state?.auth}
+          itemkey={state?.itemkey}
         />
         {state?.img?.length ? (
           <DetailPicture
@@ -53,6 +52,7 @@ function Detail() {
           auth={state?.auth}
           category={state?.category}
           content={state?.content}
+          convenience={state?.convenience}
           img2={state?.img?.length ? state?.img[1] : null}
         />
         <DetailDescRight price={state?.price} star={state?.star} />
@@ -64,11 +64,12 @@ function Detail() {
         setModalShow={setModalShow}
         img={state?.img}
       />
-
       <CommentsLayout />
-    </>
+    </AllBox>
   );
 }
+
+const AllBox = styled.div``;
 
 const TopMainBox = styled.div`
   width: 73%;
@@ -83,10 +84,15 @@ const MiddleMainBox = styled.div`
   margin: 20px auto 0px auto;
 `;
 
-const Comment = styled.div`
-  background-color: #99d1aa;
-  width: 100%;
-  height: 500px;
+const MorePictureBtn = styled.button`
+  background-color: white;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid black;
+  position: absolute;
+  top: 74.5%;
+  left: 77.5%;
+  z-index: 3;
 `;
 
 const CommetLine = styled.hr`

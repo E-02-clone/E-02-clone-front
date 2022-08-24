@@ -7,7 +7,7 @@ import SaveAndExit from "./components/SaveAndExit";
 import HelpBtn from "./components/Help";
 import CompletedBar from "./components/CompletedBar";
 
-function WritePageSeven({ GoFrontBtn, setArray }) {
+function WritePageSeven({ GoFrontBtn, setArray, array }) {
   window.Buffer = window.Buffer || require("buffer").Buffer;
   const arr = [];
 
@@ -62,9 +62,10 @@ function WritePageSeven({ GoFrontBtn, setArray }) {
   };
 
   const WriteDone = async () => {
-    if (detailImgs.length < 5) {
+    console.log("실행됌", array.length);
+    if (array.length < 5) {
       alert("사진은 최소 5개를 넣어주세요");
-    } else {
+    } else if (array.length >= 5) {
       await GoFrontBtn();
     }
   };
@@ -126,11 +127,13 @@ function WritePageSeven({ GoFrontBtn, setArray }) {
         </ShowImage>
         <CompletedBar comple={7}></CompletedBar>
         <RearBtn />
-        <FrontBtn
+        <GoFront
           onClick={() => {
             WriteDone();
           }}
-        />
+        >
+          다음
+        </GoFront>
       </RightBicBox>
     </>
   );
@@ -197,6 +200,16 @@ const DeleteImg = styled.button`
   :hover {
     border: 2px solid black;
   }
+`;
+
+const GoFront = styled.button`
+  position: fixed;
+  top: 84%;
+  right: 2%;
+  padding: 4px;
+  margin-top: 70px;
+  border: 1px solid transparent;
+  background-color: transparent;
 `;
 
 export default WritePageSeven;
