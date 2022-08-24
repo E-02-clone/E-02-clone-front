@@ -16,7 +16,13 @@ const Comments = () => {
     state.writeSlice
 );
 
-    
+
+
+let b = [];
+let average = 0
+for (let i = 0 ; i < comments.data?.length; i++){
+let a = b.push(Number(comments.data[i]?.star))
+};
 
 useEffect(()=>{
     dispatch(getCommentsThunk(params.id))
@@ -38,13 +44,16 @@ useEffect(()=>{
 // console.log(userkey)
     
     return (
+        <>
+        <p className="starAverage">&#9733;{(b.reduce((a,b)=>a+b, 0)/comments.data?.length).toFixed(2) }</p>
+        <h3 className="commentAmounts">·후기{comments.data.length}개</h3>
         <div className="commentsContainer">
         {comments?.data?.map((a)=> {
             return(
             <section key={a.commentkey} className="comments">
-            <h5>작성자:{a.userkey}</h5>
-            <h5>&#9733;{a.star}</h5>
-            <h6 className="writeTime">{a.updatedAt}</h6>
+            <h5 >{a.nickname}</h5>
+            <h5 >&#9733;{a.star}</h5>
+            <h6 className="writeTime">{a.updatedAt?.substr(0,10)}</h6>
             <h5 className="commentBox">{a.comment}</h5>
             
             </section>
@@ -52,6 +61,7 @@ useEffect(()=>{
         })
         }
         </div>
+        </>
     )
 };
 export default Comments;

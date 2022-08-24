@@ -57,24 +57,26 @@ const EditComment = (props) => {
         {editComment.star}
         <h6>{props.comments.updatedAt}</h6>
         <h6 className="CommentBox"><input onChange={onChangeHandler} name="comment" type="text"/></h6>
-        </div>
         <div className="editButtons">
             <button className="editButton" onClick={onClickChangeHandler}>취소</button>
             <button className="deleteButton" onClick={()=>onClickPatchHandler(props.comments.commentkey)}>수정</button>
         </div>
+        </div>
+        
         </>
          :
          <>
         <div className="editCommentBox">
-        <h4>{props.comments.userkey}</h4>
+        <h4>{props.comments.nickname}</h4>
         <h4>&#9733;{props.comments.star}</h4>
-        <h6>{props.comments.updatedAt}</h6>
+        <h6 className="updateDate">{props.comments.updatedAt?.substr(0,10)}</h6>
         <h6 className="CommentBox">{props.comments.comment}</h6>
-        </div>
         {userKey === props.comments.userkey ? <div className="editButtons">
             <button className="editButton" onClick={onClickChangeHandler}>수정</button>
             <button className="deleteButton" onClick={onClickDeleteHandler}>삭제</button>
         </div> : null}
+        </div>
+        
         
         </>
         

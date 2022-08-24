@@ -11,16 +11,19 @@
 
 .CommentBox{
     width: 200px;
-    height: 100px;
+    height: 20px;
+}
+
+.updateDate{
+    font-weight: 200;
 }
 
 .editButtons{
     display: flex;
     flex-direction: row;
-    justify-content: center;
     height: 25px;
     align-items: center;
-    margin-top: 50px;
+    margin: 0 0 0 300px ;
 }
 
 .editButton{

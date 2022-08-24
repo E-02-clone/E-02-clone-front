@@ -28,7 +28,6 @@ const WriteComments = (props) => {
     const onClickSubmitHandler = () => {
         if (writeComment?.star !== '' && writeComment?.comment !== '') {
             dispatch(postCommentsThunk(writeComment));
-            window.location.reload();
         } else if (writeComment?.star === '' || writeComment?.comment === '') {
             window.alert('모든값을 입력해주세요');
         }
