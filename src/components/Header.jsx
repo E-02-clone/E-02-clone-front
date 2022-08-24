@@ -173,7 +173,7 @@ const MoreSearchBar = styled.div`
     background-color: white;
     border-bottom: 1px solid  rgb(240, 240, 240);
     position: absolute;
-    z-index: 4;
+    z-index: 7;
     display:flex;
     justify-content: center;
     align-items: center;
