@@ -16,7 +16,6 @@ function Detail() {
   const state = useSelector((state) => state.ItemSlice.Items);
   const params = useParams();
   const [ModalShow, setModalShow] = useState("none");
-  // console.log(state);
 
   useEffect(() => {
     dispatch(_GetItems(params.id));
@@ -35,6 +34,7 @@ function Detail() {
           star={state?.star}
           location={state?.location}
           nickname={state?.auth}
+          itemkey={state?.itemkey}
         />
         {state?.img?.length ? (
           <DetailPicture

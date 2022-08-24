@@ -1,15 +1,23 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import jwt_decode from "jwt-decode";
 import copyURL from "../../utils/copyURL";
 import { _DeleteItem } from "../../app/slice/ItemSlice";
+import { setLike } from "../../app/slice/mainSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as solidFaHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
-function DetailTitle({ title, star, location, nickname }) {
+function DetailTitle({ title, star, location, nickname, itemkey }) {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  let likeArr = [];
+  likeArr = useSelector((state) => state?.main?.data?.likes);
+  console.log(likeArr); //좋아요 한 배열
+  console.log(itemkey); //키값
 
   const token = localStorage.getItem("jwtToken");
 
@@ -26,6 +34,10 @@ function DetailTitle({ title, star, location, nickname }) {
   try {
     getedNickname = jwt_decode(token);
   } catch (error) {}
+
+  const TakeLike = (key) => {
+    dispatch(setLike(key));
+  };
 
   return (
     <div>
@@ -97,17 +109,31 @@ function DetailTitle({ title, star, location, nickname }) {
           >
             공유하기
           </div>
-          <div
-            onClick={() => {
-              alert("아직 미구현 입니다.");
-            }}
-            style={{
-              textDecoration: "underline",
-              cursor: "pointer",
-            }}
-          >
-            ♡ 저장
-          </div>
+          {likeArr.includes(itemkey) ? (
+            <div
+              onClick={() => {
+                TakeLike(itemkey);
+              }}
+              style={{
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+            >
+              ♥︎ 완료
+            </div>
+          ) : (
+            <div
+              onClick={() => {
+                TakeLike(itemkey);
+              }}
+              style={{
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+            >
+              ♡ 저장
+            </div>
+          )}
         </TitleBottonRight>
       </TitleBottom>
     </div>
