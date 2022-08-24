@@ -12,17 +12,17 @@ import Map from '../components/Map';
 const Wish = () => {
     const item = useSelector(state => state.ItemSlice?.Items)
 
-
     const [nowIndex, setNowIndex] = useState(0)
+
     const params = useParams()
-    console.log(params)
+
     const dispatch = useDispatch()
+
     useEffect(() => {
         dispatch(_GetItems(params.id))
-    }, [dispatch])
+    }, [dispatch, params.id])
+
     const navigate = useNavigate()
-    console.log(nowIndex)
-    console.log(item)
     return (
         <div>
             <Header type="wish" />
