@@ -6,6 +6,11 @@
     margin: 0 0 0 50px;
 }
 
+.starAverage{
+    font-size: 50px;
+    margin-left: 50px;
+}
+
 .commentsSubject{
     width: 100%;
     margin-left: 50px;
@@ -13,9 +18,14 @@
     height: 50vh;
 }
 
+.commentAmounts{
+    margin-left: 110px;
+    padding: 23px;
+}
+
 .comments{
     width: 45%;
-    margin-right: 50px;
+    margin-right: 40px;
     padding: 0 8px;
     overflow: hidden;
 }
