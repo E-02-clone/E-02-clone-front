@@ -52,7 +52,6 @@ function WriteTwo() {
 
   const WriteDone = async () => {
     if (getLocation) {
-      console.log("수정시작");
       await dispatch(
         _EditItem([
           { token: tokenValue },
@@ -74,7 +73,6 @@ function WriteTwo() {
       await alert("수정이 완료되었습니다.");
       await navigate("/");
     } else {
-      console.log("생성시작");
       await dispatch(
         _WriteDone([
           { token: tokenValue },
