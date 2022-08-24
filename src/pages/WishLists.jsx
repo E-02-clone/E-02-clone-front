@@ -22,7 +22,7 @@ const WishLists = () => {
                 <WishSpace>
                     {items?.map((item) => {
                         return (
-                            <div style={{ display: "flex", flexDirection: "column" }}>
+                            <div key={item.itemkey} style={{ display: "flex", flexDirection: "column" }}>
                                 <Link to={`/wishLists/${item.itemkey}`}>
                                     <WishBox>
                                         <img className="img main" src={item.img[0]} alt="" />
@@ -31,7 +31,6 @@ const WishLists = () => {
                                             <img className="img sub__below" src={item.img[2]} alt="" />
                                         </SubImage>
                                     </WishBox>
-
                                 </Link>
                                 <div style={{ width: "400px", margin: "0 10px", padding: " 12px 0 16px 0", height: "60px", fontSize: "24px", fontWeight: "bold" }}>
                                     {item.title}
