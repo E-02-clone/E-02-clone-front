@@ -1,17 +1,13 @@
 
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { postLogin, postJoin } from '../app/slice/userSlice';
 import { isId, isPassword, isNickname, isEmail } from '../utils/regExpLogin';
-import { Link, useNavigate } from 'react-router-dom';
 const Modal = ({ closeModal }) => {
 
-    const dispatch = useDispatch();
-    const user = useSelector(state => state.user)
     const [mode, setMode] = useState('login')
-    const navigate = useNavigate()
-    console.log(user)
+
     const userId = useRef();
     const password = useRef();
     const comfirm = useRef();
@@ -26,10 +22,9 @@ const Modal = ({ closeModal }) => {
     const [checkEmail, setCheckEmail] = useState(null);
     const [checkHost, setCheckHost] = useState(true);
 
-    const validateData = (e, data) => {
+    const dispatch = useDispatch();
 
-    }
-
+    /** 회원가입 함수 */
     const submitJoin = (e) => {
         e.preventDefault();
         if (checkId !== true) {
@@ -59,8 +54,6 @@ const Modal = ({ closeModal }) => {
         }
     }
 
-    console.log(host.current?.value);
-
     if (mode === "login") {
         return (
             <OpenModal>
@@ -77,8 +70,8 @@ const Modal = ({ closeModal }) => {
                         <p>전화나 문자로 전화번호를 확인하겠습니다. 일반 문자 메시지 요금 및 데이터 요금이 부과됩니다.</p>
                         <LoginButton onClick={(e) => {
                             e.preventDefault();
-                            dispatch(postLogin({ userId: "test", password: "1q1q" }))
-                            closeModal()
+                            dispatch(postLogin({ userId: userId.current.value, password: password.current.value }));
+                            closeModal();
                         }}>로그인</LoginButton>
                         <p onClick={() => {
                             setMode("join");

@@ -1,0 +1,40 @@
+.editCommentContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.editCommentBox{
+    margin: 0 30px 30px 170px;
+    width: 400px;
+    
+}
+
+.CommentBox{
+    width: 200px;
+    height: 20px;
+}
+
+.updateDate{
+    font-weight: 200;
+}
+
+.editButtons{
+    display: flex;
+    flex-direction: row;
+    height: 25px;
+    align-items: center;
+    margin: 0 0 0 300px ;
+}
+
+.editButton{
+  margin: 0 10px;
+   background-color: white;
+   padding: 2px;
+   border-radius: 5px;
+}
+
+.deleteButton{
+ background-color: white;
+ padding: 2px;
+ border-radius: 5px;
+}

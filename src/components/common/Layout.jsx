@@ -10,9 +10,7 @@ const Layout = (props) => {
 const StyledLayout = styled.div`
   position: relative;
   align-items: center;
-
   padding: 0 160px;
-
   height: 100vh;
 `;
 
