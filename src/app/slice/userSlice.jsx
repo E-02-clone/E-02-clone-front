@@ -4,6 +4,7 @@ import axios from 'axios';
 import setAuthorizationToken from './auth';
 import jwt_decode from "jwt-decode";
 
+
 const initialState = {
     user: {},
     isAuth: null
@@ -30,6 +31,7 @@ export const postJoin = createAsyncThunk('/join',
             const { data } = await axios.post(process.env.REACT_APP_URL + '/user/join', payload)
             console.log(data)
             return thunkAPI.fulfillWithValue(data)
+
         } catch (error) {
 
             return thunkAPI.rejectWithValue(error)

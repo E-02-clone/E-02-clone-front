@@ -70,8 +70,8 @@ const Modal = ({ closeModal }) => {
                         <p>전화나 문자로 전화번호를 확인하겠습니다. 일반 문자 메시지 요금 및 데이터 요금이 부과됩니다.</p>
                         <LoginButton onClick={(e) => {
                             e.preventDefault();
-                            dispatch(postLogin({ userId: userId.current.value, password: password.current.value }))
-                            closeModal()
+                            dispatch(postLogin({ userId: userId.current.value, password: password.current.value }));
+                            closeModal();
                         }}>로그인</LoginButton>
                         <p onClick={() => {
                             setMode("join");

@@ -105,6 +105,7 @@ const Category = ({ setSelect }) => {
                     }
                     )
                 }
+
             </CategoryBar>
         </CategoryBox>
     );

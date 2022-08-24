@@ -102,8 +102,7 @@ const Header = ({ modal, setModal, type }) => {
             {modal ? <Modal closeModal={closeModal} /> : null}
         </>
     );
-};
-
+}
 export default Header;
 
 const SearchInput = styled.input`

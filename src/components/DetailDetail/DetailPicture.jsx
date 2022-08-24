@@ -16,13 +16,7 @@ function DetailPicture({ img1, img2, img3, img4, img5, showModal }) {
             <SmallPictureTwo src={`${img3}`} />
             <SmallPictureThree src={`${img4}`} />
             <SmallPictrueFour src={`${img5}`} />
-            <MorePictureBtn
-              onClick={() => {
-                showModal("");
-              }}
-            >
-              사진 모두 보기
-            </MorePictureBtn>
+
           </PictureSmallBox>
         </AllPictures>
       ) : null}
@@ -97,6 +91,11 @@ const MorePictureBtn = styled.button`
   padding: 5px;
   border-radius: 10px;
   border: 1px solid black;
+  margin-left: 380px;
+  position: absolute;
+  top: 83%;
+  left: 53%;
+  transform: translate(-50%, -50%);
 `;
 
 export default DetailPicture;

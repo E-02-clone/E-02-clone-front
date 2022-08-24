@@ -34,6 +34,7 @@ const ItemList = ({ select, setModal, modal }) => {
             </ItemListLayout>
         )
     }
+
 };
 
 export default ItemList;

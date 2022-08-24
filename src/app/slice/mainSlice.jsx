@@ -20,6 +20,7 @@ export const getMainItems = createAsyncThunk('/',
         try {
             const { data } = await axios.get(process.env.REACT_APP_URL + '/item')
             console.log(data)
+
             return thunkAPI.fulfillWithValue(data)
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
@@ -36,7 +37,7 @@ export const setLike = createAsyncThunk('/like',
                         Authorization: `Bearer ${localStorage.getItem("jwtToken")}`
                     },
                 })
-            console.log(data)
+
             return thunkAPI.fulfillWithValue(data.like)
         } catch (error) {
         }
@@ -57,7 +58,6 @@ export const myLike = createAsyncThunk('/mylike',
         }
     }
 )
-
 
 const mainSlice = createSlice({
     name: 'mainSlice',
@@ -80,6 +80,7 @@ const mainSlice = createSlice({
         },
         [myLike.fulfilled]: (state, { payload }) => {
             state.myLike = payload
+
         }
     }
 })
