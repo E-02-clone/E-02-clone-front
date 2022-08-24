@@ -20,7 +20,7 @@ function DetailTitle({ title, star, location }) {
   };
 
   const editDetail = () => {
-    navigate("/write/1", { state: { id: params.id, edit: true } });
+    navigate("/write", { state: { id: params.id, edit: true } });
   };
 
   return (

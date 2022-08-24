@@ -4,6 +4,15 @@ import { keyframes } from "styled-components";
 import copyURL from "../../utils/copyURL";
 
 function MorePictures({ ModalShow, setModalShow, img }) {
+  let forkey = [];
+  const makekey = () => {
+    img.map((value) => {
+      const forpush = value.slice(76, 83);
+      forkey.push(forpush);
+      return forkey;
+    });
+  };
+
   return (
     <Background style={{ display: `${ModalShow}` }}>
       <ModalContainer style={{ display: `${ModalShow}` }}>
@@ -34,7 +43,12 @@ function MorePictures({ ModalShow, setModalShow, img }) {
         <ImagesBox>
           {img?.length &&
             img.map((value) => {
-              return <Images key={value} src={`${value}`} />;
+              return (
+                <Images
+                  src={`${value}`}
+                  key={value[79] + value[81] + value[82]}
+                />
+              );
             })}
         </ImagesBox>
       </ModalContainer>
@@ -70,16 +84,14 @@ const ImagesBox = styled.div`
 `;
 
 const Background = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  overflow-y: scroll;
-  z-index: 6;
-  ::-webkit-scrollbar {
-    display: none;
-  }
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 0;
+  overflow-y: auto;
 `;
 
 const modalShowKF = keyframes`
@@ -99,5 +111,4 @@ const ModalContainer = styled.div`
   transition: all 300ms ease-in;
   animation: ${modalShowKF} 0.3s;
 `;
-
 export default MorePictures;
