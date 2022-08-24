@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faAngleRight, faArrowLeft, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const Category = ({ setSelect }) => {
 
@@ -87,48 +89,106 @@ const Category = ({ setSelect }) => {
 
     ]
 
-    return (
-        <CategoryBox>
-            <CategoryBar>
-                {
-                    categoryList.map((category, i) => {
-                        return (
-                            <div className="category__img" key={i} onClick={() => {
-                                setSelect(category.title)
-                            }}>
-                                <img src={category.img} alt={category.title} />
-                                <span className="category__title">
-                                    {category.title}
-                                </span>
-                            </div>
-                        )
-                    }
-                    )
-                }
+    const [categoryIndex, setCategoryIndex] = useState(0);
+    console.log(categoryIndex)
+    const [rightStop, setRightStop] = useState(false);
+    const [leftStop, setLeftStop] = useState(false);
 
-            </CategoryBar>
-        </CategoryBox>
+
+    return (
+        <CategoryBottomLine>
+
+            <CategoryMover className='left__button' onClick={() => {
+                categoryIndex !== 0 && setCategoryIndex(categoryIndex + 1)
+            }}>
+                <FontAwesomeIcon icon={faAngleLeft} />
+            </CategoryMover>
+
+            <CategoryMover className='right__button' stop={rightStop} onClick={() => {
+                categoryIndex !== -11 && setCategoryIndex(categoryIndex - 1)
+            }}>
+                <FontAwesomeIcon icon={faAngleRight} />
+            </CategoryMover>
+
+            <CategorySliderBox>
+                <CategoryBox style={{ transform: `translateX(${categoryIndex * 100}px)` }}>
+                    <CategoryBar>
+                        {
+                            categoryList.map((category, i) => {
+                                return (
+                                    <div className="category__img" key={i} onClick={() => {
+                                        setSelect(category.title)
+                                    }}>
+                                        <img src={category.img} alt={category.title} />
+                                        <span className="category__title">
+                                            {category.title}
+                                        </span>
+                                    </div>
+                                )
+                            }
+                            )
+                        }
+
+                    </CategoryBar>
+                </CategoryBox>
+
+            </CategorySliderBox>
+        </CategoryBottomLine>
     );
 };
 
 export default Category;
 
+const CategoryMover = styled.button`
+    position: absolute;
+    z-index: 5;
+    width: 32px;
+    height: 32px;
+    border-radius:50%;
+    border:1px solid lightgray;
+    background-color: white;
+`
+
+const CategorySliderBox = styled.div`
+    position: relative;
+    width: 90vw;
+    margin: 0 160px;
+    overflow: hidden;
+`
+const CategoryBottomLine = styled.div`
+    width: 100%;
+    border-bottom:1px solid lightgray;
+    display: flex;
+    align-items: center;
+    .right__button {
+        right: 8vw;
+    }
+    .right__button:hover {
+        box-shadow: 0 0 5px 0 lightgray;
+    }
+    .left__button {
+        left: 7vw;
+    }
+    .left__button:hover {
+        box-shadow: 0 0 5px 0 lightgray;
+    }
+ 
+`
 
 const CategoryBox = styled.div`
-    width: 100%;
+    width: 148vw;
     overflow: hidden;
     position: sticky;
     top: 80px;
     z-index: 4;
-    border-bottom:1px solid lightgray;
-    padding: 0 160px;
+    /* margin: 0 160px; */
     background-color: white;
+    transition: 0.2s all;
 `
 
 const CategoryBar = styled.div`
     margin: 0;
     width: 100%;
-    overflow: hidden;
     top: 90px;
     background-color: white;
     height: 80px;
@@ -145,12 +205,12 @@ const CategoryBar = styled.div`
         height: 54px;
         margin-top: 12px;
         opacity: 0.6;
-        transition: 0.2s ease-in;
+        transition: 0.2s all;
     }
 
     .category__title {
         padding-bottom: 5px;
-        transition: 0.2s ease-in;
+        transition: 0.2s all;
     }
 
     .category__img:hover {

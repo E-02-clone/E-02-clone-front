@@ -44,8 +44,7 @@ const Header = ({ modal, setModal, type }) => {
                         />
                     </LogoButton>
                     <HeaderRight className='header__right'>
-                        { }
-                        <HeaderButton>호스트 되기</HeaderButton>
+                        <Link to={"/write/1"}><HeaderButton>호스트 되기</HeaderButton></Link>
                         <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
                         <LoginButton onClick={() => {
                             setDropbox(!dropbox)
@@ -174,7 +173,7 @@ const MoreSearchBar = styled.div`
     background-color: white;
     border-bottom: 1px solid  rgb(240, 240, 240);
     position: absolute;
-    z-index: 4;
+    z-index: 7;
     display:flex;
     justify-content: center;
     align-items: center;
