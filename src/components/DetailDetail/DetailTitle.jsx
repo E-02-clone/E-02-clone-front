@@ -2,10 +2,11 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import jwt_decode from "jwt-decode";
 import copyURL from "../../utils/copyURL";
 import { _DeleteItem } from "../../app/slice/ItemSlice";
 
-function DetailTitle({ title, star, location }) {
+function DetailTitle({ title, star, location, nickname }) {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,36 +22,43 @@ function DetailTitle({ title, star, location }) {
     navigate("/write/1", { state: { id: params.id, edit: true } });
   };
 
+  let getedNickname = null;
+  try {
+    getedNickname = jwt_decode(token);
+  } catch (error) {}
+
   return (
     <div>
       <TitleAlign>
         <TitleTop>{title}</TitleTop>
-        <DeletePutBtn>
-          <span
-            onClick={() => {
-              editDetail();
-            }}
-            style={{
-              marginRight: "45px",
-              textDecoration: "underline",
-              cursor: "pointer",
-            }}
-          >
-            수정
-          </span>
-          <span
-            onClick={() => {
-              deleteitem();
-            }}
-            style={{
-              marginRight: "8px",
-              textDecoration: "underline",
-              cursor: "pointer",
-            }}
-          >
-            삭제
-          </span>
-        </DeletePutBtn>
+        {getedNickname?.nickname === nickname ? (
+          <DeletePutBtn>
+            <span
+              onClick={() => {
+                editDetail();
+              }}
+              style={{
+                marginRight: "45px",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+            >
+              수정
+            </span>
+            <span
+              onClick={() => {
+                deleteitem();
+              }}
+              style={{
+                marginRight: "8px",
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+            >
+              삭제
+            </span>
+          </DeletePutBtn>
+        ) : null}
       </TitleAlign>
       <TitleBottom>
         <TitleBottomLeft>

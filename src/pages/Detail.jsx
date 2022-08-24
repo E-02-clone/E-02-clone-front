@@ -16,7 +16,7 @@ function Detail() {
   const state = useSelector((state) => state.ItemSlice.Items);
   const params = useParams();
   const [ModalShow, setModalShow] = useState("none");
-  console.log(state);
+  // console.log(state);
 
   useEffect(() => {
     dispatch(_GetItems(params.id));
@@ -26,7 +26,6 @@ function Detail() {
     setModalShow("");
   };
 
-  // 테스트
   return (
     <AllBox>
       <Header />
@@ -35,6 +34,7 @@ function Detail() {
           title={state?.title}
           star={state?.star}
           location={state?.location}
+          nickname={state?.auth}
         />
         {state?.img?.length ? (
           <DetailPicture

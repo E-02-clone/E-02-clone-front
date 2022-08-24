@@ -181,16 +181,6 @@ const SalePriceCheckBox = styled.input`
   background-color: black;
 `;
 
-const BackBtn = styled.button`
-  position: fixed;
-  top: 84%;
-  right: 45%;
-  padding: 4px;
-  margin-top: 70px;
-  border: 1px solid transparent;
-  background-color: transparent;
-`;
-
 const GoFront = styled.button`
   position: fixed;
   top: 84%;

@@ -20,7 +20,10 @@ function WritepageFour({ location_ref, setLocation }) {
         <SaveAndExit />
         <HelpBtn />
         <Location>
-          <div>LOCATION</div>
+          <TextBox>
+            <div>LOCATION</div>
+            <LocationName>지역명을 입력해주세요.</LocationName>
+          </TextBox>
           <textarea
             onChange={() => {
               seletValue(location_ref.current.value);
@@ -43,6 +46,16 @@ const RightBicBox = styled.div`
   margin-top: -8%;
 `;
 
+const TextBox = styled.div`
+  display: flex;
+`;
+
+const LocationName = styled.div`
+  margin-left: 30px;
+  font-size: 0.8em;
+  margin-top: 3px;
+`;
+
 const LeftTitle = styled.div`
   display: flex;
   color: white;
@@ -61,7 +74,7 @@ const Location = styled.div`
   margin-top: 50px;
   textarea {
     height: 40px;
-    width: 190%;
+    width: 130%;
     margin-top: 10px;
     border: 1px solid black;
     border-radius: 5px;
