@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function DetailDescLift({ auth, category, content, img2 }) {
+function DetailDescLift({ auth, category, content, img2, convenience }) {
   return (
     <>
       <MiddleLeftBox>
@@ -12,7 +12,7 @@ function DetailDescLift({ auth, category, content, img2 }) {
         <hr />
         <div style={{ display: "flex" }}>
           <img
-            src="/images/Medal.png"
+            src="https://forfiles.s3.ap-northeast-2.amazonaws.com/Medal.png"
             alt="medal"
             style={{ height: "100%", marginRight: "10px" }}
           />
@@ -26,7 +26,7 @@ function DetailDescLift({ auth, category, content, img2 }) {
         </div>
         <div style={{ display: "flex", marginTop: "20px" }}>
           <img
-            src="/images/Map.png"
+            src="https://forfiles.s3.ap-northeast-2.amazonaws.com/Map.png"
             alt="map"
             style={{ height: "100%", marginRight: "10px" }}
           />
@@ -38,7 +38,10 @@ function DetailDescLift({ auth, category, content, img2 }) {
           </div>
         </div>
         <div style={{ display: "flex", marginTop: "20px" }}>
-          <img src="/images/CalendarMini.png" alt="CalMini" />
+          <img
+            src="https://forfiles.s3.ap-northeast-2.amazonaws.com/CalendarMini.png"
+            alt="CalMini"
+          />
           <div style={{ marginTop: "8px", marginLeft: "10px" }}>
             8월 26일 전까지 무료로 취소하실 수 있습니다.
           </div>
@@ -87,13 +90,11 @@ function DetailDescLift({ auth, category, content, img2 }) {
           />
         ) : null}
         <hr />
-        <img
-          src="/images/Convenient.png"
-          alt="convenient"
-          style={{
-            width: "95%",
-          }}
-        />
+        <ConviniBox>
+          {convenience?.map((value) => {
+            return <Convinients key={value[0] + value[1]}>{value}</Convinients>;
+          })}
+        </ConviniBox>
         <MoreConvenient
           onClick={() => {
             alert("아직 미구현 입니다");
@@ -102,7 +103,7 @@ function DetailDescLift({ auth, category, content, img2 }) {
           편의시설 모두 보기
         </MoreConvenient>
         <img
-          src="/images/Calendar.png"
+          src="https://forfiles.s3.ap-northeast-2.amazonaws.com/Calendar.png"
           alt="Calender"
           style={{
             width: "90%",
@@ -130,6 +131,23 @@ const MiddleLeftBox = styled.div`
 const DescribeTitle = styled.div`
   font-weight: 500;
   font-size: 24px;
+`;
+
+const ConviniBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const Convinients = styled.p`
+  width: 30%;
+  height: 40px;
+
+  margin-right: 30px;
+  text-align: center;
+  margin-top: 5px;
+  padding: 7px;
+  border: 1px solid darkgray;
+  border-radius: 10px;
 `;
 
 const MoreConvenient = styled.button`

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 function DetailDescRight({ price, star }) {
@@ -63,7 +64,7 @@ function DetailDescRight({ price, star }) {
             }}
           >
             <span>
-              <img src="/images/report.png" />
+              <img src="https://forfiles.s3.ap-northeast-2.amazonaws.com/report.png" />
             </span>
             숙소 신고하기
           </ReportBtn>
@@ -77,13 +78,13 @@ const MiddleRightBox = styled.div`
   width: 35%;
   min-width: 300px;
   margin-left: 2%;
-  height: 1500px;
+  height: 1800px;
 `;
 
 const StickyTopBox = styled.div`
   position: sticky;
   height: 460px;
-  top: 30px;
+  top: 11%;
   padding: 24px;
 
   border: 1px solid lightgray;
