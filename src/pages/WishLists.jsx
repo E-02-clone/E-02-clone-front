@@ -12,7 +12,7 @@ const WishLists = () => {
     console.log(items)
     useEffect(() => {
         dispatch(myLike())
-    }, [dispatch, items])
+    }, [dispatch])
 
     return (
         <>
