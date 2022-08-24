@@ -9,10 +9,8 @@ function DetailTitle({ title, star, location }) {
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // console.log(params.id);
 
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vya2V5IjoxLCJuaWNrbmFtZSI6ImppbiIsImlhdCI6MTY2MTE1NTAzMCwiZXhwIjoxNjYxMjQxNDMwfQ.Mo4r0YvWVN5QL7iJhV2Fuzx14MzuzmkOGT-WDk_Owhw";
+  const token = localStorage.getItem("jwtToken");
 
   const deleteitem = async () => {
     await dispatch(_DeleteItem([{ key: params.id }, { token }]));
@@ -20,7 +18,7 @@ function DetailTitle({ title, star, location }) {
   };
 
   const editDetail = () => {
-    navigate("/write", { state: { id: params.id, edit: true } });
+    navigate("/write/1", { state: { id: params.id, edit: true } });
   };
 
   return (

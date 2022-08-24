@@ -35,21 +35,20 @@ function WriteTwo() {
   const title_ref = useRef(title);
   const content_ref = useRef(content);
 
-  const tokenValue =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vya2V5IjozLCJuaWNrbmFtZSI6Im1vZHVyaSIsImlhdCI6MTY2MTI0NDIxOCwiZXhwIjoxNjYxMzMwNjE4fQ.GLVT239j6-eIyakIdsJDe5aoXdV9h03m73gaRjmiRHg";
+  const tokenValue = localStorage.getItem("jwtToken");
 
-  console.log(
-    type,
-    category,
-    space,
-    location,
-    roomCount,
-    convenient,
-    array,
-    title,
-    content,
-    theprice
-  );
+  // console.log(
+  //   type,
+  //   category,
+  //   space,
+  //   location,
+  //   roomCount,
+  //   convenient,
+  //   array,
+  //   title,
+  //   content,
+  //   theprice
+  // );
 
   const WriteDone = async () => {
     if (getLocation) {
@@ -73,6 +72,7 @@ function WriteTwo() {
         ])
       );
       await alert("수정이 완료되었습니다.");
+      navigate("/");
     } else {
       console.log("생성시작");
       await dispatch(
@@ -93,6 +93,7 @@ function WriteTwo() {
         ])
       );
       await alert("작성이 완료되었습니다.");
+      navigate("/");
     }
   };
 
@@ -127,7 +128,11 @@ function WriteTwo() {
       ) : null}
       {id == 6 ? <Amenity setConvenient={setConvenient} /> : null}
       {id == 7 ? (
-        <WritePageSeven GoFrontBtn={GoFrontBtn} setArray={setArray} />
+        <WritePageSeven
+          GoFrontBtn={GoFrontBtn}
+          setArray={setArray}
+          array={array}
+        />
       ) : null}
       {id == 8 ? (
         <WritepageEight setTitle={setTitle} title_ref={title_ref} />
