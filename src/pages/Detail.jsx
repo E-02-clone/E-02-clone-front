@@ -67,10 +67,10 @@ function Detail() {
         setModalShow={setModalShow}
         img={state?.img}
       />
-      <HostInfo auth={state?.auth} star={state?.star} />
-      <RoomNotion />
-      <BnbSupport />
       <CommentsLayout />
+      {/* <HostInfo auth={state?.auth} star={state?.star} />
+      <RoomNotion />
+      <BnbSupport /> */}
     </AllBox>
   );
 }
