@@ -7,8 +7,8 @@ import SaveAndExit from "./components/SaveAndExit";
 import HelpBtn from "./components/Help";
 import CompletedBar from "./components/CompletedBar";
 
+window.Buffer = window.Buffer || require("buffer").Buffer;
 function WritePageSeven({ GoFrontBtn, setArray, array }) {
-  window.Buffer = window.Buffer || require("buffer").Buffer;
   const arr = [];
 
   // base64로 인코딩된 데이터 담는곳

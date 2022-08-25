@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import CommentsLayout from "../components/commentsLayout";
+import CommentsLayout from "../components/Comments/commentsLayout";
 import { _GetItems } from "../app/slice/ItemSlice";
 import DetailTitle from "../components/DetailDetail/DetailTitle";
 import DetailPicture from "../components/DetailDetail/DetailPicture";

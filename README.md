@@ -1,70 +1,135 @@
-# Getting Started with Create React App
+<h2><b>클론코딩</b></h2>
+<h2>AirBnB</h2>
+<h4>프로젝트 설명: 에어비앤비 클론코딩</h4>
+<h4>📆 기간: 2022.08.19 ~ 2022.08.25</h4>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<hr/>
 
-## Available Scripts
+<h2>🔧 STACK</h2>
 
-In the project directory, you can run:
+- <strong>Client</strong>
+<p>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black">
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
+  <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+</p>
 
-### `yarn start`
+- <strong>UI</strong>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<p>
+  <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+  <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
+  <img src="https://img.shields.io/badge/font awsome-528DD7?style=for-the-badge&logo=Font Awesome&logoColor=white">
+  <img src="https://img.shields.io/badge/Amazon S3-1572B6?style=for-the-badge&logo=Amazon S3&logoColor=white">
+</p>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- <strong>Server & Deploy</strong>
 
-### `yarn test`
+<p>
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
+</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<hr/>
 
-### `yarn build`
+### 🔎 Function
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### 📄 메인 페이지
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![스크린샷 2022-08-25 오후 2 55 53](https://user-images.githubusercontent.com/97071355/186586163-7d72244e-7708-44bd-a6e3-82f719daec6f.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+호스트가 작성한 게시글들을 볼 수 있다.
+게시글을 상단에서 검색할수 있고, 항목에 따라 게시글을 볼 수 있다.
+사진을 옆에 버튼을 클릭하여 슬라이드로 여러가지 사진을 볼 수 있다.
+하트를 눌러서 wishlist에 저장할 수 있다.
 
-### `yarn eject`
+#### 📄 회원가입과 로그인 모달
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![스크린샷 2022-08-25 오후 2 58 27](https://user-images.githubusercontent.com/97071355/186586697-a7936119-72bc-44b1-8fd3-78b30deefa56.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![스크린샷 2022-08-25 오후 3 00 51](https://user-images.githubusercontent.com/97071355/186586810-587a25a8-35f2-4e81-8dec-e8c86fef4608.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+회원가입과 로그인 페이지는 모달로 처리하였다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### 📄 작성 페이지
 
-## Learn More
+![스크린샷 2022-08-25 오후 3 02 10](https://user-images.githubusercontent.com/97071355/186587047-7bfa138f-0290-42ff-bab0-03ee5f27740f.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+작성 페이지는 원하는 항목을 클릭하고 다음으로 넘어가도록 처리하였다
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### 📄 상세페이지와 댓글
 
-### Code Splitting
+![스크린샷 2022-08-25 오후 2 56 17](https://user-images.githubusercontent.com/97071355/186587103-85029d63-5363-4d3a-89ec-573723f05258.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![스크린샷 2022-08-25 오후 5 11 46](https://user-images.githubusercontent.com/97071355/186612088-d46b0170-c365-4cc6-be54-c164c7db9efd.png)
 
-### Analyzing the Bundle Size
+![스크린샷 2022-08-25 오후 5 12 05](https://user-images.githubusercontent.com/97071355/186612106-641ce285-df19-4b22-a965-a196efb8c85f.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+상단에는 사진, 하부에는 상세 내용을 넣었다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+댓글에는 미리보기가 있으며, 전부 보기위해 모달창을 띄어서 수정과 삭제를 할수 있다.
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+</hr>
 
-### Deployment
+## 📁 File Directory
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```bash
+/src
+  ├── app // 리덕스 폴더
+  │   ┝── slice  각종 slice 파일들 첨부         
+  │   │                                     
+  │   ┕── store.jsx  리덕스 store 파일         
+  │
+  │
+  ┝── components  ──┬──── calendar 달력을 위한 컴퍼넌트 모음 폴더
+  │                 │
+  │                 ┝──── category 카테고라를 위한 컴퍼넌트 모음 폴더
+  │                 │
+  │                 ┝──── comments 댓글을 위한 컴퍼넌트 모음 폴더
+  │                 │
+  │                 ┝──── common 공통사항들을 위한 컴퍼넌트 모음 폴더
+  │                 │
+  │                 ┝──── css Css모음 폴더
+  │                 │
+  │                 ┝──── DetailDetail 상세페이지를 위한 컴퍼넌트 모음 폴더
+  │                 │
+  │                 ┝──── WriteDetail 작성페이지를 위한 컴퍼넌트 모음 폴더 ( 예비용, 사용하지 않음 ) 
+  │                 │
+  │                 ┝──── WriteDetail2 상세페이지를 위한 컴퍼넌트 모음 폴더 ( 현재 적용중 )
+  │                 │
+  │                 ┕─── componentsfiles...jsx 그 외 각종 컴퍼넌트 파일들
+  │            
+  │ 
+  │ 
+  ┝── pages ───────┬───── Detail.jsx 메인 상세페이지 파일
+  │                │          
+  │                ┝───── Home.jsx 메인 메인페이지 파일
+  │                │          
+  │                ┝───── Wish.jsx 첫번째 위시페이지 파일
+  │                │          
+  │                ┝───── WishList.jsx 두번째 위시페이지 파일
+  │                │          
+  │                ┝───── Write.jsx 작성페이지 파일 ( 미사용 )
+  │                │          
+  │                ┕───── WriteTwo.jsx 작성페이지 파일 ( 사용중 )
+  │                                                
+  │                 
+  ├── shared ───── Router.jsx 라우터 파일
+  │   
+  ├── utils 각종 기능을 넣어놓은 파일            
+  │
+  ┕──────── app.js , index.js ...
 
-### `yarn build` fails to minify
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+</hr>
+
+## 🧑🏻‍💻 Members
+
+| 이름   | 담당 API                     | 역할                       |
+| ------ | ---------------------------- | -------------------------- |
+| 박종현 | 메인페이지, 로그인, 회원가입, WishPage, 지도 | 가입과 로그인, WishList |
+| 김윤철 | 댓글 CRUD                  | 댓글 관련           |
+| 문동환 | 게시글 CRUD                     | 게시글 관련 담당         |

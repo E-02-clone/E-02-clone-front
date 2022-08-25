@@ -5,7 +5,6 @@ import SeeAllComments from "./seeAllComments";
 import WriteComments from "./writeComments";
 import { useSelector } from "react-redux";
 
-
 const CommentsLayout = () => {
     
     const [modalOpen, setModalOpen] = useState(false);
@@ -38,7 +37,7 @@ const CommentsLayout = () => {
             <Comments onClick={onClickModal}/>
             <button className="modalButton" onClick={onClickModal}>모든 후기 보기</button>
             <div className={modalOpen ? "modalOpen" : "modalClose"}>
-            {modalOpen ? <SeeAllComments onClick={onClickModal}/> : <SeeAllComments/>}
+            {modalOpen ? <SeeAllComments modalOpen={modalOpen} onClick={onClickModal}/> : <SeeAllComments/>}
             </div>
         </div>
     )

@@ -36,10 +36,36 @@
   border: 3px solid black;
   
 }
+.starBox{
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+}
+
+.star1, .star2, .star3, .star4, .star5{
+  width: 200px;
+  height: 5px;
+  background-color: rgba(0, 0, 0, 0.232);
+  border: 1px solid none;
+  margin-top: 30px;
+}
+
+.star1_1, .star2_2, .star3_3, .star4_4, .star5_5{
+  width: 150px;
+  height: 5px;
+  background-color: rgba(36, 39, 181, 0.925);
+  border: 1px solid none;
+  margin-top: 30px;
+  position: relative;
+  top: -175px;
+  
+}
 
 .makeItRow2{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .modalComments{
@@ -48,10 +74,8 @@
   flex-direction: column;
 }
 
-.modalCommentsBox{
-  width: 100%;
-  height: 70px;
-}
+
+
 
 .detailCommentsContainer{
   display: flex;
@@ -64,4 +88,8 @@
 
 .detailButtons{
   position: relative;
+}
+
+.modalAllComments{
+  margin: -370px 0 0 0;
 }

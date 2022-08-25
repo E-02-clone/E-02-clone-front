@@ -14,110 +14,112 @@ import { Link } from "react-router-dom";
 import { getSearchItems } from "../app/slice/mainSlice";
 
 const Header = ({ modal, setModal, type }) => {
-  const searchItem = useRef();
-  const dispatch = useDispatch();
-  const [openSearchBar, setOpenSearchBar] = useState("normal");
-  const onLogoutHandler = () => {
-    const confirm = window.confirm("로그아웃 하시겠습니까?");
-    if (confirm) {
-      dispatch(logoutUser());
-      window.location.replace("/");
-    }
-  };
-  const openModal = () => {
-    setModal(true);
-  };
+    const searchItem = useRef()
+    const dispatch = useDispatch()
+    const [openSearchBar, setOpenSearchBar] = useState("normal")
+    const onLogoutHandler = () => {
+        const confirm = window.confirm("로그아웃 하시겠습니까?");
+        if (confirm) {
+            dispatch(logoutUser());
+            window.location.replace("/");
+        }
+    };
 
-  const closeModal = () => {
-    setModal(false);
-  };
+    const loginConfirm = () => {
+        const confirm = window.confirm("로그인 후 이용 가능합니다. 로그인 하시겠습니까?");
+        if (confirm) {
+            setModal(true);
+        }
+    };
 
-  const [dropbox, setDropbox] = useState(false);
-  return (
-    <>
-      <Head mode={openSearchBar}>
-        <HeaderBar mode={openSearchBar}>
-          <LogoButton>
-            <Logo
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/640px-Airbnb_Logo_B%C3%A9lo.svg.png"
-              alt="logo"
-              width="100em"
-              onClick={() => {
-                window.location.replace("/");
-              }}
-            />
-          </LogoButton>
-          <HeaderRight className="header__right">
-            <Link to={"/write/1"}>
-              <HeaderButton>호스트 되기</HeaderButton>
-            </Link>
-            <HeaderButton>
-              <FontAwesomeIcon icon={faGlobe} />
-            </HeaderButton>
-            <LoginButton
-              onClick={() => {
-                setDropbox(!dropbox);
-              }}
-            >
-              <span className="bars">
-                <FontAwesomeIcon icon={faBars} />
-              </span>
-              <span className="user">
-                <FontAwesomeIcon icon={faCircleUser} />
-              </span>
-              <Dropbox open={dropbox}>
-                <StyledLink to="/wishlists">
-                  <div className="wishlist">위시리스트</div>
-                </StyledLink>
-                {localStorage.getItem("jwtToken") === null ? (
-                  <div onClick={openModal}>로그인</div>
-                ) : (
-                  <div onClick={onLogoutHandler}>로그아웃</div>
-                )}
-              </Dropbox>
-            </LoginButton>
-          </HeaderRight>
-        </HeaderBar>
-        <MoreSearchBar mode={openSearchBar}>
-          {type !== "wish" && (
-            <Search>
-              <SearchBar
-                mode={openSearchBar}
-                onClick={() => {
-                  openSearchBar === "normal" && setOpenSearchBar("search");
-                }}
-              >
-                {openSearchBar === "normal" ? (
-                  <div>
-                    <span className="search where">어디든지</span>
-                    <span className="search when">언제든 일주일</span>
-                    <span>게스트 추가</span>
-                  </div>
-                ) : (
-                  <div>
-                    <SearchInput type="text" ref={searchItem} />
-                  </div>
-                )}
+    const openModal = () => {
+        setModal(true);
+    };
 
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    dispatch(getSearchItems(searchItem.current.value));
-                    setOpenSearchBar("normal");
-                  }}
-                >
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-              </SearchBar>
-            </Search>
-          )}
-        </MoreSearchBar>
-      </Head>
-      <Background mode={openSearchBar} />
-      {modal ? <Modal closeModal={closeModal} /> : null}
-    </>
-  );
-};
+    const closeModal = () => {
+        setModal(false);
+    };
+
+
+    const [dropbox, setDropbox] = useState(false)
+    return (
+        <>
+            <Head mode={openSearchBar}>
+                <HeaderBar mode={openSearchBar}>
+                    <LogoButton>
+                        <Logo
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/640px-Airbnb_Logo_B%C3%A9lo.svg.png"
+                            alt="logo"
+                            width="100em"
+                            onClick={() => {
+                                window.location.replace('/')
+                            }}
+                        />
+                    </LogoButton>
+                    <HeaderRight className='header__right'>
+                        <Link to={"/write/1"}><HeaderButton>호스트 되기</HeaderButton></Link>
+                        <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
+                        <LoginButton onClick={() => {
+                            setDropbox(!dropbox)
+                        }}>
+                            <span className="bars"><FontAwesomeIcon icon={faBars} /></span>
+                            <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
+                            <Dropbox open={dropbox}>
+                                {localStorage.getItem("jwtToken") === null
+                                    ?
+                                    <div className="wishlist" onClick={loginConfirm}>위시리스트</div>
+                                    :
+                                    <StyledLink to="/wishlists">
+                                        <div className="wishlist">위시리스트</div>
+                                    </StyledLink>
+                                }
+                                {localStorage.getItem("jwtToken") === null
+                                    ?
+                                    <div onClick={openModal}>로그인</div>
+                                    :
+                                    <div onClick={onLogoutHandler}>로그아웃</div>
+                                }
+                            </Dropbox>
+                        </LoginButton>
+                    </HeaderRight>
+                </HeaderBar>
+                <MoreSearchBar mode={openSearchBar}>
+                    {type !== "wish" &&
+                        <Search >
+                            <SearchBar mode={openSearchBar} onClick={() => {
+                                openSearchBar === "normal" &&
+                                    setOpenSearchBar("search")
+                            }}>
+                                {
+                                    openSearchBar === "normal" ?
+                                        <div>
+                                            <span className="search where">어디든지</span>
+                                            <span className="search when">언제든 일주일</span>
+                                            <span>게스트 추가</span>
+                                        </div>
+                                        :
+                                        <div>
+                                            <SearchInput type="text" ref={searchItem} />
+                                        </div>
+                                }
+
+                                <button onClick={(e) => {
+                                    e.preventDefault();
+                                    dispatch(getSearchItems(searchItem.current.value))
+                                    setOpenSearchBar("normal")
+
+                                }}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                            </SearchBar>
+                        </Search>}
+
+
+                </MoreSearchBar>
+            </Head>
+            <Background mode={openSearchBar} />
+            {modal ? <Modal closeModal={closeModal} /> : null}
+        </>
+    );
+}
 export default Header;
 
 const SearchInput = styled.input`
