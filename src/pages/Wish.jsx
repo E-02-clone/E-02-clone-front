@@ -56,8 +56,8 @@ const Wish = () => {
                                 nowIndex === item.img?.length - 1 ? setNowIndex(0) : setNowIndex(nowIndex + 1)
                             }}><FontAwesomeIcon icon={faAngleRight} /></MoveSlider>
                             <WishBody nowIndex={nowIndex} style={{ display: "flex", transform: `translateX(-${nowIndex * 300}px)` }}>
-                                {item.img?.map(img =>
-                                    <Link to={`/detail/${params.id}`}>
+                                {item.img?.map((img, i) =>
+                                    <Link key={i} to={`/detail/${params.id}`}>
                                         <ImageSlider>
                                             <img src={img} alt="" />
                                         </ImageSlider>

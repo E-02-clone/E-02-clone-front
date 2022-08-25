@@ -19,6 +19,14 @@ const Header = ({ modal, setModal, type }) => {
             window.location.replace("/");
         }
     };
+
+    const loginConfirm = () => {
+        const confirm = window.confirm("로그인 후 이용 가능합니다. 로그인 하시겠습니까?");
+        if (confirm) {
+            setModal(true);
+        }
+    };
+
     const openModal = () => {
         setModal(true);
     };
@@ -52,9 +60,14 @@ const Header = ({ modal, setModal, type }) => {
                             <span className="bars"><FontAwesomeIcon icon={faBars} /></span>
                             <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
                             <Dropbox open={dropbox}>
-                                <StyledLink to="/wishlists">
-                                    <div className="wishlist">위시리스트</div>
-                                </StyledLink>
+                                {localStorage.getItem("jwtToken") === null
+                                    ?
+                                    <div className="wishlist" onClick={loginConfirm}>위시리스트</div>
+                                    :
+                                    <StyledLink to="/wishlists">
+                                        <div className="wishlist">위시리스트</div>
+                                    </StyledLink>
+                                }
                                 {localStorage.getItem("jwtToken") === null
                                     ?
                                     <div onClick={openModal}>로그인</div>
