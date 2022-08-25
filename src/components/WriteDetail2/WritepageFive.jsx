@@ -14,8 +14,8 @@ function WritepageFive({ GoFrontBtn, setRoomCount }) {
 
   // 받은 4개의 자료를 WriteTwo에 저장해준다.
   const submit = async () => {
-    await GoFrontBtn();
     setRoomCount({ guest, bed: bedCount, bedRoom, bathRoom: bathroom });
+    await GoFrontBtn();
   };
 
   const PlusClick = (value, setValue) => {

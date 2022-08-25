@@ -10,6 +10,9 @@ import DetailDescLift from "../components/DetailDetail/DetailDescLeft";
 import DetailDescRight from "../components/DetailDetail/DetailDescRight";
 import MorePictures from "../components/DetailDetail/MorePictures";
 import Header from "../components/Header";
+import HostInfo from "../components/DetailDetail/HostInfo";
+import RoomNotion from "../components/DetailDetail/RoomNotion";
+import BnbSupport from "../components/DetailDetail/BnbSupport";
 
 function Detail() {
   const dispatch = useDispatch();
@@ -65,6 +68,9 @@ function Detail() {
         img={state?.img}
       />
       <CommentsLayout />
+      <HostInfo auth={state?.auth} star={state?.star} />
+      <RoomNotion />
+      <BnbSupport />
     </AllBox>
   );
 }
@@ -84,16 +90,6 @@ const MiddleMainBox = styled.div`
   margin: 20px auto 0px auto;
 `;
 
-const MorePictureBtn = styled.button`
-  background-color: white;
-  padding: 5px;
-  border-radius: 10px;
-  border: 1px solid black;
-  position: absolute;
-  top: 74.5%;
-  left: 77.5%;
-  z-index: 3;
-`;
 
 const CommetLine = styled.hr`
   margin-top: 70px;
@@ -101,4 +97,5 @@ const CommetLine = styled.hr`
   margin-left: auto;
   margin-right: auto;
 `;
+
 export default Detail;
