@@ -57,7 +57,7 @@ const star5_rate = ((star5 / (star1 + star2 + star3 + star4 + star5)).toFixed(2)
     
     return (
         <>
-        <p className="starAverage">&#9733;{b = [] ? 0 : (b.reduce((a,b)=>a+b, 0)/comments.data?.length).toFixed(2) }</p>
+        <p className="starAverage">&#9733;{b == [] ? 0 : (b.reduce((a,b)=>a+b, 0)/comments.data?.length).toFixed(2) }</p>
         <h3 className="commentAmounts">·후기{comments.data.length}개</h3>
         <div className="commentsContainer">
         <div className="starBox2">
