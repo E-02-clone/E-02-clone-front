@@ -24,6 +24,5 @@
 - <strong>Server & Deploy</strong>
 
 <p>
-  <img src="https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=Heroku&logoColor=white">
   <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
 </p>
