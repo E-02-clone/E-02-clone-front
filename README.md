@@ -19,7 +19,7 @@
 <p>
   <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
   <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
-  <img src="https://img.shields.io/badge/Scss-green?style=flat&logo=Sass&logoColor=528DD7"/>
+  <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=FontAwsome&logoColor=Blue">
 </p>
 
 - <strong>Server & Deploy</strong>
