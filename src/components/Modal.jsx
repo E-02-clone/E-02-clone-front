@@ -1,10 +1,15 @@
-
 import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { postLogin, postJoin } from '../app/slice/userSlice';
 import { isId, isPassword, isNickname, isEmail } from '../utils/regExpLogin';
+import { checkDuplicationId, checkDuplicationNick, checkDuplicationEmail } from '../app/slice/userSlice';
+
+
 const Modal = ({ closeModal }) => {
+
+    const check = useSelector(state => state.user.check);
+    console.log(check)
 
     const [mode, setMode] = useState('login')
 
@@ -21,6 +26,17 @@ const Modal = ({ closeModal }) => {
     const [checkComfirm, setCheckComfirm] = useState('');
     const [checkEmail, setCheckEmail] = useState(null);
     const [checkHost, setCheckHost] = useState(true);
+    const [myHost, setMyHost] = useState("none");
+
+    if (myHost === "true") {
+        setMyHost(true)
+    } else if (myHost === "false") {
+        setMyHost(false)
+    }
+
+    const [checkIdState, setCheckIdState] = useState(false)
+    const [checkNickState, setCheckNickState] = useState(false)
+    const [checkEmailState, setCheckEmailState] = useState(false)
 
     const dispatch = useDispatch();
 
@@ -28,31 +44,61 @@ const Modal = ({ closeModal }) => {
     const submitJoin = (e) => {
         e.preventDefault();
         if (checkId !== true) {
+            alert('아이디를 확인해주세요')
             userId.current.focus()
         } else if (checkNickname !== true) {
+            alert('닉네임을 확인해주세요')
             nickname.current.focus()
         } else if (checkPassword !== true) {
+            alert('비밀번호를 확인해주세요')
             password.current.focus()
         } else if (password.current.value !== checkComfirm) {
+            alert('비밀번호를 확인해주세요')
             comfirm.current.focus()
         } else if (checkEmail !== true) {
+            alert('이메일을 확인해주세요')
             email.current.focus()
         } else if (host.current?.value === "none") {
-            host.current.focus()
+            alert('호스트를 확인해주세요')
             setCheckHost(false);
+        } else if (check.id.ok !== true) {
+            alert('아이디를 중복확인 해주세요')
+            userId.current.focus()
+        } else if (check.nickname.ok !== true) {
+            alert('닉네임을 중복확인 해주세요')
+            nickname.current.focus()
+        } else if (check.email.ok !== true) {
+            alert('이메일을 중복확인 해주세요')
+            email.current.focus()
         } else {
-            alert('회원가입에 성공하셨습니다 !')
             dispatch(postJoin({
                 userId: userId.current.value,
                 nickname: nickname.current.value,
                 password: password.current.value,
-                comfirm: comfirm.current.value,
                 email: email.current.value,
-                host: host.current.value
+                host: myHost
             }))
+            alert("회원가입에 성공하셨습니다.")
             setMode('login')
         }
     }
+    /**
+     * 
+     * @param {string} key: userId, nickname, email 
+     * @param {string} value 
+     */
+    const checkDuplicationUser = (key, value) => {
+        if (key === "userId") {
+            dispatch(checkDuplicationId({ key: key, value }));
+            setCheckIdState(check.id?.ok)
+        } else if (key === "nickname") {
+            dispatch(checkDuplicationNick({ key, value }));
+            setCheckIdState(check.nickname?.ok)
+        } else if (key === "email") {
+            dispatch(checkDuplicationEmail({ key, value }));
+            setCheckIdState(check.email?.ok)
+        }
+    };
 
     if (mode === "login") {
         return (
@@ -65,8 +111,8 @@ const Modal = ({ closeModal }) => {
                     </header>
                     <h4 className='welcome_text'>에어비앤비에 오신 것을 환영합니다.</h4>
                     <LoginForm>
-                        <input type="text" className="input_id" ref={userId} />
-                        <input type="text" className="input_pw" ref={password} />
+                        <input placeholder='아이디' type="text" className="input_id" ref={userId} />
+                        <input placeholder='비밀번호' type="text" className="input_pw" ref={password} />
                         <p>전화나 문자로 전화번호를 확인하겠습니다. 일반 문자 메시지 요금 및 데이터 요금이 부과됩니다.</p>
                         <LoginButton onClick={(e) => {
                             e.preventDefault();
@@ -91,33 +137,51 @@ const Modal = ({ closeModal }) => {
                     </header>
 
                     <JoinForm>
-                        <input type="text" className="input_id" placeholder='아이디' ref={userId} autoFocus onChange={(e) => {
-                            isId(e.target.value) ? setCheckId(true) : setCheckId(false)
-                        }} />
+                        <span style={{ display: "flex", alignItems: "center", width: "90%" }}>
+                            <input type="text" className="input_id" placeholder='아이디' ref={userId} autoFocus onChange={(e) => {
+                                isId(e.target.value) ? setCheckId(true) : setCheckId(false)
+                            }} />
+                            <DuplicationCheckButton onClick={() => checkDuplicationUser("userId", userId.current.value)}>중복</DuplicationCheckButton>
+                        </span>
                         {
                             checkId === null ?
                                 <div className='init'>6~12자의 영문 소문자, 숫자와 특수기호(._-)만 사용 가능합니다.</div>
                                 :
                                 checkId ?
-                                    <div className='success'>사용 가능한 아이디입니다.</div>
+                                    (check.id?.ok === false ?
+                                        <div className='fail'>중복된 아이디입니다.</div>
+                                        :
+                                        <div className='success'>사용 가능한 아이디입니다.</div>
+                                    )
                                     :
                                     <div className='fail'>아이디를 확인해주세요. 6~12자, 영문을 포함하고 숫자와 일부 특수문자(._-) 입력 가능</div>
                         }
-                        <input type="text" className="input_nickname" placeholder='닉네임' ref={nickname} onChange={(e) => {
-                            isNickname(e.target.value) ? setCheckNickname(true) : setCheckNickname(false)
-                        }} />
+
+                        <span style={{ display: "flex", alignItems: "center", width: "90%" }}>
+                            <input type="text" className="input_nickname" placeholder='닉네임' ref={nickname} onChange={(e) => {
+                                isNickname(e.target.value) ? setCheckNickname(true) : setCheckNickname(false)
+                            }} />
+                            <DuplicationCheckButton check={check.id?.ok} onClick={() => checkDuplicationUser("nickname", nickname.current.value)}>중복</DuplicationCheckButton>
+                        </span>
+
                         {
                             checkNickname === null ?
                                 <div className='init'>2~6자, 영문과 한글 입력 가능</div>
                                 :
                                 checkNickname ?
-                                    <div className='success'>사용 가능한 닉네임입니다.</div>
+                                    (check.nickname?.ok === false ?
+                                        <div className='fail'>중복된 닉네임입니다.</div>
+                                        :
+                                        <div className='success'>사용 가능한 닉네임입니다.</div>
+                                    )
                                     :
                                     <div className='fail'>닉네임을 확인해주세요. 2~6자, 영문과 한글 입력 가능</div>
                         }
-                        <input type="password" className="input_pw" placeholder='비밀번호' ref={password} onChange={(e) => {
-                            isPassword(e.target.value) ? setCheckPassword(true) : setCheckPassword(false)
-                        }} />
+                        <span style={{ display: "flex", alignItems: "center", width: "90%" }}>
+                            <input type="password" className="input_pw" placeholder='비밀번호' ref={password} onChange={(e) => {
+                                isPassword(e.target.value) ? setCheckPassword(true) : setCheckPassword(false)
+                            }} />
+                        </span>
                         {
                             checkPassword === null ?
                                 <div className='init'>8~20자, 영문과 숫자를 포함하고 일부 특수문자(!@#$%^&*) 입력 가능</div>
@@ -127,9 +191,12 @@ const Modal = ({ closeModal }) => {
                                     :
                                     <div className='fail'>비밀번호를 확인해주세요!</div>
                         }
-                        <input type="password" className="input_pw" placeholder='비밀번호 확인' ref={comfirm} onChange={(e) => {
-                            setCheckComfirm(e.target.value)
-                        }} />
+                        <span style={{ display: "flex", alignItems: "center", width: "90%" }}>
+                            <input type="password" className="input_pw" placeholder='비밀번호 확인' ref={comfirm} onChange={(e) => {
+                                setCheckComfirm(e.target.value)
+                            }} />
+                        </span>
+
                         {
                             checkComfirm === '' ?
                                 <div className='init'>비밀번호를 입력해주세요.</div>
@@ -139,23 +206,38 @@ const Modal = ({ closeModal }) => {
                                     :
                                     <div className='fail'>비밀번호를 확인해주세요!</div>
                         }
-                        <input type="text" className="input_email" placeholder='이메일' ref={email} onChange={(e) => {
-                            isEmail(e.target.value) ? setCheckEmail(true) : setCheckEmail(false)
-                        }} />
+                        <span style={{ display: "flex", width: "90%" }}>
+                            <input type="text" className="input_email" placeholder='이메일' ref={email} onChange={(e) => {
+                                isEmail(e.target.value) ? setCheckEmail(true) : setCheckEmail(false)
+                            }} />
+                            <DuplicationCheckButton onClick={() => checkDuplicationUser("email", email.current.value)}>중복</DuplicationCheckButton>
+
+                        </span>
                         {
                             checkEmail === null ?
                                 <div className='init'>이메일을 입력해주세요.</div>
                                 :
                                 checkEmail ?
-                                    <div className='success'>사용 가능한 이메일입니다.</div>
+                                    (check.email?.ok === false ?
+                                        <div className='fail'>중복된 이메일입니다.</div>
+                                        :
+                                        <div className='success'>사용 가능한 이메일입니다.</div>
+                                    )
                                     :
                                     <div className='fail'>이메일을 확인해주세요!</div>
                         }
-                        <select name="" id="" ref={host}>
-                            <option value="none" className="select__init">--당신은 호스트인가요?--</option>
-                            <option value={true}>맞습니다.</option>
-                            <option value={false}>아닙니다.</option>
-                        </select>
+                        <span style={{ display: "flex", width: "90%" }}>
+
+                            <select name="" id="" onChange={(e) => {
+                                e.preventDefault()
+                                setMyHost(e.target.value)
+                            }}>
+                                <option value="none" className="select__init">--당신은 호스트인가요?--</option>
+                                <option value={true}>맞습니다.</option>
+                                <option value={false}>아닙니다.</option>
+                            </select>
+                        </span>
+
                         {
                             !checkHost && <div className='fail'>옵션을 선택해주세요.</div>
                         }
@@ -168,6 +250,22 @@ const Modal = ({ closeModal }) => {
 };
 
 export default Modal;
+
+const DuplicationCheckButton = styled.button`
+    width: 56px;
+    height: 56px;
+    margin-top: 10px;
+    border: 1px solid #e11a60;
+    background-color: transparent;
+    color: #e11a60;
+    border-radius: 0 10px 10px 0;
+    font-weight:bold;
+    transition: 0.2s all;
+    &:hover {
+        color: white;
+        background-color: #e11a60;
+    }
+`
 
 
 const OpenModal = styled.div`
@@ -270,6 +368,7 @@ const LoginForm = styled.form`
         border: 1px solid lightgray;
         height: 56px;
         width: 100%;
+        padding-left: 24px;
     }
     .input_id {
         border-bottom: none;
@@ -284,7 +383,7 @@ const LoginForm = styled.form`
         width: 100%;
     }
 `
-const JoinForm = styled.form`
+const JoinForm = styled.div`
     height: 724px;
     width: 100%;
     display: flex;
@@ -294,10 +393,10 @@ const JoinForm = styled.form`
     padding-top: 0;
     input {
         margin-top: 10px;
-        border-radius: 20px;
+        border-radius: 10px 0 0 10px;
         border: 1px solid lightgray;
         height: 56px;
-        width: 100%;
+        width: 90%;
         padding: 24px;
     }
     input:focus {
@@ -310,7 +409,7 @@ const JoinForm = styled.form`
         padding-left: 24px;
         color: gray;
         border:  1px solid lightgray;
-        border-radius: 20px;
+        border-radius: 10px;
 
     }
     select:focus {
@@ -333,6 +432,10 @@ const JoinForm = styled.form`
     }
     .select__init {
         display: none;
+    }
+    .input_pw {
+        width: 100%;
+        border-radius:10px;
     }
 `
 
