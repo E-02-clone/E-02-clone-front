@@ -2,17 +2,19 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    width: 80%;
-    height: 80vh;
-    background-color: rgb(255, 255, 255);
+    width: 70%;
+    height: 70vh;
     overflow: hidden;
-    border-radius: 20px;
-    padding: 100px;
-    margin-left: 50px;
+    padding: 60px 100px 0 0;
+    margin-left: 0px;
         z-index: 3;
 }
 
-.writeSearch{
+.writeCommentsHeader{
+  height: 100vh;
+}
+
+.writeBox{
   height: 100px;
   margin-top: 30px;
   border-radius: 10px;

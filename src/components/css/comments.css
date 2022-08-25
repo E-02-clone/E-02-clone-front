@@ -1,14 +1,17 @@
 .commentsContainer{
     display: flex;
     flex-wrap: wrap;
-    width: 2000px;
+    width: 100%;
     padding: 50px;
     margin: 0 0 0 50px;
+    height: 74vh;
+    overflow: hidden;
 }
 
 .starAverage{
     font-size: 50px;
     margin-left: 50px;
+    margin-top: 50px;
 }
 
 .commentsSubject{
@@ -20,14 +23,26 @@
 
 .commentAmounts{
     margin-left: 110px;
+    margin-top: 50px;
     padding: 23px;
 }
 
+.starBox2{
+    position: absolute;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+  }
+    
+
 .comments{
-    width: 45%;
-    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    min-width: 25%;
     padding: 0 8px;
     overflow: hidden;
+    margin-left: 250px
 }
 
 .writeTime{
@@ -42,8 +57,7 @@
     font-weight: 300;
 }
 
-.modalButton{
-    width: 120px;
-    height: 30px;
-    margin-left: 50px;
+.commentsdetail{
+    width: 50%;
 }
+

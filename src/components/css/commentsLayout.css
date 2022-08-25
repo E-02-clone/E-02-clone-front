@@ -1,8 +1,9 @@
 .commentsLayout{
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     margin-left: 14%;
+    
 }
 
 .commentsSubject{
@@ -59,8 +60,13 @@ transition: all 100ms ease-in;
 .modalButton{
   background-color: white;
   border-radius: 5px;
-  margin-bottom: 50px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+    width: 120px;
+    height: 30px;
+    margin-left: 60px;
 }
+
 
 @keyframes modal-bg-show {
   from {
