@@ -68,9 +68,9 @@ function Detail() {
         img={state?.img}
       />
       <CommentsLayout />
-      {<HostInfo auth={state?.auth} star={state?.star} />
+      <HostInfo auth={state?.auth} star={state?.star} />
       <RoomNotion />
-      <BnbSupport />}
+      <BnbSupport />
     </AllBox>
   );
 }
