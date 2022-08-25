@@ -68,9 +68,9 @@ function Detail() {
         img={state?.img}
       />
       <CommentsLayout />
-      {/* <HostInfo auth={state?.auth} star={state?.star} />
+      {<HostInfo auth={state?.auth} star={state?.star} />
       <RoomNotion />
-      <BnbSupport /> */}
+      <BnbSupport />}
     </AllBox>
   );
 }
@@ -90,16 +90,6 @@ const MiddleMainBox = styled.div`
   margin: 20px auto 0px auto;
 `;
 
-// const MorePictureBtn = styled.button`
-//   background-color: white;
-//   padding: 5px;
-//   border-radius: 10px;
-//   border: 1px solid black;
-//   position: absolute;
-//   top: 74.5%;
-//   left: 77.5%;
-//   z-index: 3;
-// `;
 
 const CommetLine = styled.hr`
   margin-top: 70px;
