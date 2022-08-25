@@ -31,15 +31,12 @@ const Write = () => {
     setContent(k);
   }
 
-  // console.log(reallocation?.state?.id);
-
   const RememberSFage = (i, j) => {
     setLocation(i);
     setPrice(j);
   };
 
-  const GetedToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vya2V5IjoxLCJuaWNrbmFtZSI6ImppbiIsImlhdCI6MTY2MTE1OTkwMywiZXhwIjoxNjYxMjQ2MzAzfQ.94T7PDQY-6T6uXYJKhfIPtyyaEZ1CRYThuAVNqUeTEU";
+  const GetedToken = localStorage.getItem("jwtToken");
 
   const PostItem = async () => {
     console.log(location, price, category, title, content);

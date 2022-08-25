@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useState } from "react";
 import Modal from '../components/Modal';
@@ -10,19 +9,18 @@ import Footer from '../components/common/Footer';
 
 const Home = () => {
     const [select, setSelect] = useState('전체보기');
-    console.log(select)
+    const [modal, setModal] = useState(false);
     return (
         <>
-            <Header setSelect={setSelect} />
+            <Header modal={modal} setModal={setModal} />
             <Category setSelect={setSelect} />
             <Layout>
-                <ItemList select={select} />
+                <ItemList select={select} modal={modal} setModal={setModal} />
             </Layout>
             <Footer />
 
         </>
     );
-
 };
 
 export default Home;

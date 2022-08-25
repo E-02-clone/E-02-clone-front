@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import Modal from './Modal';
+import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faGlobe, faBars, faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import Category from './category/Category';
+import { logoutUser } from '../app/slice/userSlice';
+import { Link } from 'react-router-dom';
+import { getSearchItems } from '../app/slice/mainSlice';
 
-const Header = ({ setSelect }) => {
-    const [modal, setModal] = useState(false);
-    const [openSearchBar, setOpenSearchBar] = useState(false)
-
+const Header = ({ modal, setModal, type }) => {
+    const searchItem = useRef()
+    const dispatch = useDispatch()
+    const [openSearchBar, setOpenSearchBar] = useState("normal")
+    const onLogoutHandler = () => {
+        const confirm = window.confirm("로그아웃 하시겠습니까?");
+        if (confirm) {
+            dispatch(logoutUser());
+            window.location.replace("/");
+        }
+    };
     const openModal = () => {
         setModal(true);
     };
@@ -19,109 +29,98 @@ const Header = ({ setSelect }) => {
 
 
     const [dropbox, setDropbox] = useState(false)
-
-    if (!openSearchBar) {
-        return (
-            <>
-                <Head mode="normal">
-                    <HeaderBar mode="normal">
-                        <LogoButton>
-                            <Logo
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/640px-Airbnb_Logo_B%C3%A9lo.svg.png"
-                                alt="logo"
-                                width="100em"
-
-                                onClick={() => {
-                                    window.location.replace('/')
-                                }}
-                            />
-                        </LogoButton>
-                        <HeaderRight className='header__right'>
-                            <HeaderButton>호스트 되기</HeaderButton>
-                            <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
-                            <LoginButton onClick={() => {
-                                setDropbox(!dropbox)
-                            }}>
-                                <span className="bars"><FontAwesomeIcon icon={faBars} /></span>
-                                <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
-                                <Dropbox open={dropbox}>
+    return (
+        <>
+            <Head mode={openSearchBar}>
+                <HeaderBar mode={openSearchBar}>
+                    <LogoButton>
+                        <Logo
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/640px-Airbnb_Logo_B%C3%A9lo.svg.png"
+                            alt="logo"
+                            width="100em"
+                            onClick={() => {
+                                window.location.replace('/')
+                            }}
+                        />
+                    </LogoButton>
+                    <HeaderRight className='header__right'>
+                        <Link to={"/write/1"}><HeaderButton>호스트 되기</HeaderButton></Link>
+                        <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
+                        <LoginButton onClick={() => {
+                            setDropbox(!dropbox)
+                        }}>
+                            <span className="bars"><FontAwesomeIcon icon={faBars} /></span>
+                            <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
+                            <Dropbox open={dropbox}>
+                                <StyledLink to="/wishlists">
+                                    <div className="wishlist">위시리스트</div>
+                                </StyledLink>
+                                {localStorage.getItem("jwtToken") === null
+                                    ?
                                     <div onClick={openModal}>로그인</div>
-                                </Dropbox>
-                            </LoginButton>
-                            {/* {localStorage.getItem("jwtToken") === null */}
-                        </HeaderRight>
-                    </HeaderBar>
-                    <MoreSearchBar mode="normal">
+                                    :
+                                    <div onClick={onLogoutHandler}>로그아웃</div>
+                                }
+                            </Dropbox>
+                        </LoginButton>
+                    </HeaderRight>
+                </HeaderBar>
+                <MoreSearchBar mode={openSearchBar}>
+                    {type !== "wish" &&
                         <Search >
-                            <SearchBar mode="normal" onClick={() => {
-                                setOpenSearchBar(true)
+                            <SearchBar mode={openSearchBar} onClick={() => {
+                                openSearchBar === "normal" &&
+                                    setOpenSearchBar("search")
                             }}>
-                                <div>
-                                    <span className="search where">어디든지</span>
-                                    <span className="search when">언제든 일주일</span>
-                                    <span>게스트 추가</span>
-                                </div>
-                                <button><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-                            </SearchBar>
-                        </Search>
+                                {
+                                    openSearchBar === "normal" ?
+                                        <div>
+                                            <span className="search where">어디든지</span>
+                                            <span className="search when">언제든 일주일</span>
+                                            <span>게스트 추가</span>
+                                        </div>
+                                        :
+                                        <div>
+                                            <SearchInput type="text" ref={searchItem} />
+                                        </div>
+                                }
 
-                    </MoreSearchBar>
-                </Head>
-                <Background mode="normal" />
-                {modal ? <Modal closeModal={closeModal} /> : null}
-            </>
-        );
-    } else {
-        return (
-            <>
-                <Head mode="search">
-                    <HeaderBar mode="search">
-                        <LogoButton>
-                            <Logo
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/640px-Airbnb_Logo_B%C3%A9lo.svg.png"
-                                alt="logo"
-                                width="100em"
-                                onClick={() => {
-                                    window.location.replace('/')
-                                }}
-                            />
-                        </LogoButton>
-                        <HeaderRight className='header__right'>
-                            <HeaderButton>호스트 되기</HeaderButton>
-                            <HeaderButton><FontAwesomeIcon icon={faGlobe} /></HeaderButton>
-                            <LoginButton onClick={openModal}>
-                                <span className="bars"><FontAwesomeIcon icon={faBars} /></span>
-                                <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
-                            </LoginButton>
-                        </HeaderRight>
+                                <button onClick={(e) => {
+                                    e.preventDefault();
+                                    dispatch(getSearchItems(searchItem.current.value))
+                                    setOpenSearchBar("normal")
 
-
-                    </HeaderBar>
-                    <MoreSearchBar mode="search">
-                        <Search mode="search">
-                            <SearchBar mode="search" onClick={() => {
-                                setOpenSearchBar(false)
-                            }}>
-                                <div>
-                                    <span className="search where">어디든지</span>
-                                    <span className="search when">언제든 일주일</span>
-                                    <span>게스트 추가</span>
-                                </div>
-                                <button onClick={() => {
-                                    // setOpenSearchBar(false);
                                 }}><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
                             </SearchBar>
-                        </Search>
-                    </MoreSearchBar>
-                </Head>
-                <Background mode="search" />
-                {modal ? <Modal closeModal={closeModal} /> : null}
-            </>
-        );
-    }
-};
+                        </Search>}
 
+
+                </MoreSearchBar>
+            </Head>
+            <Background mode={openSearchBar} />
+            {modal ? <Modal closeModal={closeModal} /> : null}
+        </>
+    );
+}
 export default Header;
+
+const SearchInput = styled.input`
+    width:320px;
+    margin:0 10px 0 20px;
+    border: none;
+    &:focus {
+        outline:none;
+    }
+`
+
+const StyledLink = styled(Link)`
+    text-decoration:none;
+    color: black;
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+        color: black;
+    }
+`
 
 
 const Dropbox = styled.div`
@@ -132,11 +131,10 @@ const Dropbox = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content:center;
+    margin: auto auto;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 16px;
     width: 230px;
-    height: 50px;
-    /* opacity: 0.3; */
     background-color:white;
     z-index: 11;
     top:50px;
@@ -145,11 +143,12 @@ const Dropbox = styled.div`
     display: ${(prop) => prop.open ? "block" : "none"};
     div {
         width: 100%;
-        padding: 5px 0 ;
+        padding: 10px 0 ;
     }
     div:hover {
         background-color: #f7f7f7;
     }
+
 `
 
 const Background = styled.div`
@@ -174,7 +173,7 @@ const MoreSearchBar = styled.div`
     background-color: white;
     border-bottom: 1px solid  rgb(240, 240, 240);
     position: absolute;
-    z-index: 4;
+    z-index: 7;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -290,8 +289,11 @@ const SearchBar = styled.div`
     }
 
     span {
+        border: none;
         padding: 0 16px;
+        background-color: transparent;
         color: gray;
+        border-radius: 0;
     }
     button {
         border: 0;

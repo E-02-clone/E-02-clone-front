@@ -1,19 +1,19 @@
 .modalCommentsContainer{
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     width: 1000px;
-    height: 80vh;
+    height: 70vh;
     background-color: rgb(255, 255, 255);
-    overflow: hidden;
-    border-radius: 20px;
+    overflow: auto;
     padding: 30px;
     
 }
 
 .Xbutton{
+  margin-bottom: 10px;
   background-color: white;
-  border-radius: 50%;
+  width: 25px;
+  border-radius: 20px;
   border-color: white;
   border-style: none;
 }
@@ -22,14 +22,24 @@
   background-color: #eee;
 }
 
-.search{
+.starAverage{
+  display: inline-block;
+  width: 50px;
+}
+
+.detailSearch{
   background-color: #eee;
-  margin: 33px 0;
+  margin: -38px 0 80px 100px;
   width: 600px;
   height: 50px;
   border-radius: 30px;
   border: 3px solid black;
   
+}
+
+.makeItRow2{
+  display: flex;
+  flex-direction: row;
 }
 
 .modalComments{
@@ -43,3 +53,15 @@
   height: 70px;
 }
 
+.detailCommentsContainer{
+  display: flex;
+  margin: 0 0 50px 251px;
+}
+
+.detailComments{
+  width: 530px;
+}
+
+.detailButtons{
+  position: relative;
+}
