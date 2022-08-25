@@ -60,7 +60,14 @@
 
 ![스크린샷 2022-08-25 오후 2 56 17](https://user-images.githubusercontent.com/97071355/186587103-85029d63-5363-4d3a-89ec-573723f05258.png)
 
+![스크린샷 2022-08-25 오후 5 11 46](https://user-images.githubusercontent.com/97071355/186612088-d46b0170-c365-4cc6-be54-c164c7db9efd.png)
+
+![스크린샷 2022-08-25 오후 5 12 05](https://user-images.githubusercontent.com/97071355/186612106-641ce285-df19-4b22-a965-a196efb8c85f.png)
+
+
 상단에는 사진, 하부에는 상세 내용을 넣었다.
+
+댓글에는 미리보기가 있으며, 전부 보기위해 모달창을 띄어서 수정과 삭제를 할수 있다.
 
 
 </hr>
