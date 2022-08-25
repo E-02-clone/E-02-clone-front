@@ -53,7 +53,7 @@ const Header = ({ modal, setModal, type }) => {
                             <span className="user"><FontAwesomeIcon icon={faCircleUser} /></span>
                             <Dropbox open={dropbox}>
                                 <StyledLink to="/wishlists">
-                                    <div class="wishlist">위시리스트</div>
+                                    <div className="wishlist">위시리스트</div>
                                 </StyledLink>
                                 {localStorage.getItem("jwtToken") === null
                                     ?

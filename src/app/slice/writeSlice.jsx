@@ -71,15 +71,14 @@ export const WriteSlice = createSlice({
   reducers: {},
   extraReducers: {
     [postCommentsThunk.fulfilled]: (state, action) => {
-
-      state.data.push(action.payload.data)
+      
+      state.data.push(action.payload?.data)
       
     },
     [postCommentsThunk.rejected]: (state, action) => {
     },
 
     [getCommentsThunk.fulfilled]: (state, action) => {
-      console.log(action.payload)
       state.data = action.payload.sort((a,b)=>b.commentkey-a.commentkey)
   
     },
@@ -98,7 +97,8 @@ export const WriteSlice = createSlice({
       //comment , star, commentkey
 
     state.data = current(state).data.map((el) => el.commentkey === action.payload.commentkey ?
-     {userkey:(current(state).data.filter((el) => el.commentkey === action.payload.commentkey))[0].userkey, commentkey:action.payload.commentkey , comment: action.payload.comment, star: action.payload.star } : el)
+     {userkey:(current(state).data.filter((el) => el.commentkey === action.payload.commentkey))[0].userkey, 
+      commentkey:action.payload.commentkey , comment: action.payload.comment, star: action.payload.star } : el)
       // console.log(action.payload)
       // console.log((current(state).data.filter((el) => el.commentkey === action.payload.commentkey))[0].userkey)
       // console.log(current(state).data)

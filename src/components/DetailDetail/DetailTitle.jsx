@@ -16,8 +16,8 @@ function DetailTitle({ title, star, location, nickname, itemkey }) {
   const navigate = useNavigate();
   let likeArr = [];
   likeArr = useSelector((state) => state?.main?.data?.likes);
-  console.log(likeArr); //좋아요 한 배열
-  console.log(itemkey); //키값
+  // console.log(likeArr); //좋아요 한 배열
+  // console.log(itemkey); //키값
 
   const token = localStorage.getItem("jwtToken");
 
@@ -109,7 +109,7 @@ function DetailTitle({ title, star, location, nickname, itemkey }) {
           >
             공유하기
           </div>
-          {likeArr.includes(itemkey) ? (
+          {likeArr?.includes(itemkey) ? (
             <div
               onClick={() => {
                 TakeLike(itemkey);

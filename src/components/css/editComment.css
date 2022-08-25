@@ -12,10 +12,18 @@
 .CommentBox{
     width: 200px;
     height: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .updateDate{
     font-weight: 200;
+}
+
+.editComment{
+    border-radius: 5px;
+    height: 50px;
+    width: 250px;
 }
 
 .editButtons{
