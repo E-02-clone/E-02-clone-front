@@ -26,3 +26,17 @@
 <p>
   <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
 </p>
+
+<hr/>
+
+### 🔎 Function
+
+#### 메인 페이지
+
+#### 회원가입과 로그인 모달
+
+#### 작성 페이지
+
+#### 상세페이지와 댓글
+
+</hr>
