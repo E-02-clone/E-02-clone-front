@@ -112,7 +112,7 @@ const Modal = ({ closeModal }) => {
                     <h4 className='welcome_text'>에어비앤비에 오신 것을 환영합니다.</h4>
                     <LoginForm>
                         <input placeholder='아이디' type="text" className="input_id" ref={userId} />
-                        <input placeholder='비밀번호' type="text" className="input_pw" ref={password} />
+                        <input placeholder='비밀번호' type="password" className="input_pw" ref={password} />
                         <p>전화나 문자로 전화번호를 확인하겠습니다. 일반 문자 메시지 요금 및 데이터 요금이 부과됩니다.</p>
                         <LoginButton onClick={(e) => {
                             e.preventDefault();
