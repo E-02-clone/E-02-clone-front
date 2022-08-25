@@ -2,12 +2,13 @@
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const initialState = {}
+const initialState = { data: { data: [], likes: [] } }
 
 export const getSearchItems = createAsyncThunk('/searchItems',
     async (payload, thunkAPI) => {
         try {
             const { data } = await axios.get(process.env.REACT_APP_URL + `/item/search/${payload}`)
+            console.log(data)
             return thunkAPI.fulfillWithValue(data)
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
@@ -21,6 +22,18 @@ export const getMainItems = createAsyncThunk('/',
             const { data } = await axios.get(process.env.REACT_APP_URL + '/item')
             console.log(data)
 
+            return thunkAPI.fulfillWithValue(data)
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }
+)
+
+export const getSubItems = createAsyncThunk('/subItems',
+    async (payload, thunkAPI) => {
+        try {
+            console.log(payload)
+            const { data } = await axios.get(process.env.REACT_APP_URL + `/item?page=${payload}`)
             return thunkAPI.fulfillWithValue(data)
         } catch (error) {
             return thunkAPI.rejectWithValue(error)
@@ -81,6 +94,16 @@ const mainSlice = createSlice({
         [myLike.fulfilled]: (state, { payload }) => {
             state.myLike = payload
 
+        },
+        [getSubItems.fulfilled]: (state, { payload }) => {
+            // console.log(current(state))
+            // console.log(current(state))
+            // console.log(payload)
+            state.data.likes = [...state.data.likes, ...payload.likes]
+            state.data.data = [...state.data.data, ...payload.data]
+            console.log(current(state))
+            // state.data.data = [...state.data.data, ...payload];
+            // console.log(state.data.data)
         }
     }
 })
