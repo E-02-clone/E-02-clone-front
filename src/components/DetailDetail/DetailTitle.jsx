@@ -6,9 +6,6 @@ import jwt_decode from "jwt-decode";
 import copyURL from "../../utils/copyURL";
 import { _DeleteItem } from "../../app/slice/ItemSlice";
 import { setLike } from "../../app/slice/mainSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as solidFaHeart } from "@fortawesome/free-solid-svg-icons";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
 
 function DetailTitle({ title, star, location, nickname, itemkey }) {
   const params = useParams();
@@ -16,9 +13,7 @@ function DetailTitle({ title, star, location, nickname, itemkey }) {
   const navigate = useNavigate();
   let likeArr = [];
   likeArr = useSelector((state) => state?.main?.data?.likes);
-  // console.log(likeArr); //좋아요 한 배열
-  // console.log(itemkey); //키값
-
+  const state = useSelector((state) => state?.writeSlice?.data);
   const token = localStorage.getItem("jwtToken");
 
   const deleteitem = async () => {
@@ -80,7 +75,7 @@ function DetailTitle({ title, star, location, nickname, itemkey }) {
               textDecoration: "underline",
             }}
           >
-            54개
+            {state.length}개
           </div>
           <div
             style={{
